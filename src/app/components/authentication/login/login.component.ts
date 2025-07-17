@@ -5,6 +5,8 @@ import { LocalStorageService } from '../../../services/public/localstorage.servi
 import { TokenService } from '../../../services/public/token.service';
 import { TestserverService } from '../../../services/public/testserver.service';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { ServerMessage } from '../../../domains/models/ServerMessage';
+import { LocalsettingService } from '../../../services/public/localsetting.service';
 
 
 @Component({
@@ -15,8 +17,8 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _TestServerService: TestserverService, private _TokenService: TokenService, private _LocalStorageService: LocalStorageService,
-    private _MemberService: MemberService, private fb: FormBuilder) { }
+  constructor(private _LocalStorageService: LocalStorageService,
+    private _MemberService: MemberService, private fb: FormBuilder, private settingService: LocalsettingService) { }
 
   LoginForm!: FormGroup;
   submitted = false;
@@ -30,10 +32,46 @@ export class LoginComponent implements OnInit {
 
   async LoginUser() {
     if (this.LoginForm.valid) {
-      console.log(this.LoginForm.value);
+
+      this.Isloading = true;
+      var _Username = this.LoginForm.controls['Username'].value;
+      var _Password = this.LoginForm.controls['Password'].value;
+
+      (await this._MemberService.LoginUser(_Username, _Password)).subscribe({
+        next: (data) => this.LoginSuccess(data),
+        error: (error) => {
+          throw new Error('Local Error');
+        },
+        complete: () => {
+          this.Isloading = false;
+        }
+      });
+
+    }
+    else {
+      this.settingService.ToastMessage('Warning', 'Validation Error','Please fill all required fields');
     }
   }
 
-
+  LoginSuccess(data: any) {
+    if (data.id) {
+      this.settingService.ToastMessage(data.serverMessage.type, data.serverMessage.title, data.serverMessage.message);
+      if (data.serverMessage.code == 100) {
+        this._LocalStorageService.SaveToLocalStorage(data);
+        window.location.href = "/home"
+      }
+      else {
+        this.Isloading = true;
+      }
+    }
+    else {
+      try {
+        var obj = data as ServerMessage;
+        this.settingService.ToastMessage(obj.type, obj.title, obj.message);
+      } catch {
+        throw new Error('Local Error');
+      }
+    }
+  }
 
 }
