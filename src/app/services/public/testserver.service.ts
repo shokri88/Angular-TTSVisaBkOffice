@@ -14,6 +14,6 @@ export class TestserverService {
   }
 
   async GetTest(): Promise<Observable<ServerMessage>> {
-    return this.http.get<ServerMessage>(`${this._SettingService.getData("APIUrl")}/Server/Test`);
+    return this.http.get<ServerMessage>(`${this._SettingService.getData("APIUrl")}/TTS_Server/Test`);
   }
 }

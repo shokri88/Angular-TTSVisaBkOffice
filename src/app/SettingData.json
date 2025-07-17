@@ -1,5 +1,5 @@
     {
-        "APIUrl": "https://localhost:44370/api",
+        "APIUrl": "https://localhost:44370/tts-api",
         "ExApiUsername": "GulftourismCoreUser",
         "ExApiPassword": "Ha453G$4@35$jhgjVdfGH"
     }

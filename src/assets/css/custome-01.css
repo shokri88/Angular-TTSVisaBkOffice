@@ -1,0 +1,11 @@
+.form-label {
+    margin-bottom: 0.1rem;
+}
+
+.account-pages {
+    padding-top: 5rem !important;
+}
+
+.ng-invalid {
+    border-color: red !important;
+}
