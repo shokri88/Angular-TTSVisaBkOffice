@@ -12,5 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(), // required animations providers
     provideToastr(), // Toastr providers
+    
   ]
 };

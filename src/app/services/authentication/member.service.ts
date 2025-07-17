@@ -5,6 +5,7 @@ import { IMember } from '../../domains/interfaces/IMember';
 import { ServerMessage } from '../../domains/models/ServerMessage';
 import { TokenService } from '../public/token.service';
 import { LocalsettingService } from '../public/localsetting.service';
+import { ApplicationUserDto } from '../../domains/dtos/authentication/ApplicationUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class MemberService {
     const header = await this._TokenService.GetPublicTokenHeader();
     const Role = "Admin";
     return this.http.get<IMember>(`${this._SettingService.getData("APIUrl")}/Member/LoginUser/${_Username}/${_Password}/${Role}`, { 'headers': header });
+  }
+
+   async GetUserList(RoleName?: String, OfficeCode?: string): Promise<Observable<ApplicationUserDto[]>> {
+    const header = await this._TokenService.GetUserTokenHeader();
+    return this.http.get<ApplicationUserDto[]>(`${this._SettingService.getData("APIUrl")}/Member/GetUserList?RoleName=${RoleName}&OfficeCode=${OfficeCode}`, { 'headers': header });
   }
 
 
