@@ -3,8 +3,8 @@ import { mainroutes } from './layout/main/app.main-routes';
 import { freeroutes } from './layout/free/app.free-routes';
 
 export const routes: Routes = [
+    ...freeroutes,
     ...mainroutes,
-    ...freeroutes
 ];
 
 

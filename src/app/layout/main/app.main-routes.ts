@@ -7,8 +7,7 @@ export const mainroutes: Routes = [
         path: '',
         component: MainLayoutComponent,
         children: [
-            { path: '', component: HomeComponent },
-
+            { path: 'home', component: HomeComponent },
         ]
     }
 ];

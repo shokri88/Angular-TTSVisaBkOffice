@@ -1,14 +1,5 @@
-[
     {
-        "Key": "APIUrl",
-        "Val": "https://localhost:7176/api"
-    },
-    {
-        "Key": "ExApiUsername",
-        "Val": "GulftourismCoreUser"
-    },
-    {
-        "Key": "ExApiPassword",
-        "Val": "Ha453G$4@35$jhgjVdfGH"
+        "APIUrl": "https://localhost:44370/api",
+        "ExApiUsername": "GulftourismCoreUser",
+        "ExApiPassword": "Ha453G$4@35$jhgjVdfGH"
     }
-]
