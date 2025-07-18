@@ -5,10 +5,11 @@ import { MemberService } from '../../../services/authentication/member.service';
 import { GlobalserviceService } from '../../../services/public/globalservice.service';
 import { CommonModule } from '@angular/common';
 import { HandleDatetimeComponent } from "../../../pipe/handle-datetime/handle-datetime.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, HandleDatetimeComponent],
+  imports: [CommonModule, HandleDatetimeComponent, RouterModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -36,7 +37,6 @@ export class UsersComponent implements OnInit {
   }
 
   UserListSuccess(data: ApplicationUserDto[]): void {
-    console.log(data);
     this.UsersArr = data;
   }
 

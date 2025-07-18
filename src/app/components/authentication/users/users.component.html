@@ -6,7 +6,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Users Management</a></li>
-                    <li class="breadcrumb-item active">Office User</li>
+                    <li class="breadcrumb-item active">Office Users</li>
                 </ol>
             </div>
         </div>
@@ -14,27 +14,25 @@
 </div>
 <!-- end page title -->
 
-<div class="row">
 
+
+<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <div class="row">
-                    <div class="col-4">
-                        <button type="button" class="btn btn-success waves-effect waves-light">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-success waves-effect waves-light"
+                            [routerLink]="'/users/adduser'">
                             <i class="bx bx-user-plus font-size-16 align-middle me-2"></i> Add New User
                         </button>
                     </div>
-                    <div class="col-4">
-
+                    <div class="col-md-4">
                     </div>
-                    <div class="col-4">
-
+                    <div class="col-md-4">
                     </div>
                 </div>
                 <hr>
-
                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
@@ -61,7 +59,16 @@
                             <td *ngIf="item.isConfirm">Active</td>
                             <td *ngIf="!item.isConfirm">Not Active</td>
                             <td>
-                               sss
+                                <div class="dropdown">
+                                    <button class="btn btn-info btn-sm w-100 dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Other Actions <i class="mdi mdi-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item"
+                                            [routerLink]="['/users/updateuser/', item.id]">Update User</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
