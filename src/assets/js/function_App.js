@@ -199,10 +199,9 @@ function initWaves() {
 
 // Initialize all functions
 function initApp() {
-    console.log("Initializing app...");
     initMetisMenu();
     toggleVerticalMenu();
-    highlightActiveMenu();
+    // highlightActiveMenu();
     toggleFullscreen();
     handleFullscreenChange();
     toggleRightBar();
@@ -212,15 +211,15 @@ function initApp() {
     handleThemeSwitch();
     handlePreloader();
     initWaves();
-    console.log("Ending app...");
 }
 
 // Call the initialization function
 
 
-// var intervalId = window.setInterval(function () {
-//     initApp();
-// }, 1000);
+var intervalId = window.setInterval(function () {
+    initApp();
+    handleDatatable();
+}, 1000);
 
 
 
