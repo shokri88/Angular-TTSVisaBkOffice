@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { TestserverService } from '../../../services/public/testserver.service';
 import { LocalStorageService } from '../../../services/public/localstorage.service';
 import { TokenService } from '../../../services/public/token.service';
@@ -8,7 +8,8 @@ import { TokenService } from '../../../services/public/token.service';
   imports: [],
   templateUrl: './splash.component.html',
   styleUrl: './splash.component.css',
-  providers: [TestserverService]
+  providers: [TestserverService],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class SplashComponent implements OnInit {
 

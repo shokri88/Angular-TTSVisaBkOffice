@@ -24,9 +24,10 @@ export class UsersComponent implements OnInit {
   UsersArr!: ApplicationUserDto[]
 
   async ngOnInit() {
+     this._GlobalService.LoaderLoad(true);
     this.LoadDataList();
-    // this.LoadDataTest();
-    // this.LoadDataTest2();
+    this.LoadDataTest();
+    this.LoadDataTest2();
   }
 
   async LoadDataList() {
