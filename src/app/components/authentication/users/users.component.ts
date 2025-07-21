@@ -6,6 +6,8 @@ import { GlobalserviceService } from '../../../services/public/globalservice.ser
 import { CommonModule } from '@angular/common';
 import { HandleDatetimeComponent } from "../../../pipe/handle-datetime/handle-datetime.component";
 import { RouterModule } from '@angular/router';
+import { TtsStaticsService } from '../../../services/tts-statics/tts-statics.service';
+import { TtsVisaService } from '../../../services/tts-visa/tts-visa.service';
 
 @Component({
   selector: 'app-users',
@@ -16,13 +18,15 @@ import { RouterModule } from '@angular/router';
 export class UsersComponent implements OnInit {
 
   constructor(private _MemberService: MemberService, private _GlobalService: GlobalserviceService,
-    private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
+    private fb: FormBuilder, private cdr: ChangeDetectorRef, private ttssta: TtsStaticsService, private sss: TtsVisaService) { }
 
 
   UsersArr!: ApplicationUserDto[]
 
   async ngOnInit() {
     this.LoadDataList();
+    // this.LoadDataTest();
+    // this.LoadDataTest2();
   }
 
   async LoadDataList() {
@@ -40,5 +44,29 @@ export class UsersComponent implements OnInit {
     this.UsersArr = data;
   }
 
+
+  async LoadDataTest() {
+    (await this.ttssta.GetTTSCountries()).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => { throw new Error(error); },
+      complete: () => {
+        this._GlobalService.LoaderLoad(false);
+      }
+    });
+  }
+
+  async LoadDataTest2() {
+    (await this.sss.GetVisaTypes(229,229)).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => { throw new Error(error); },
+      complete: () => {
+        this._GlobalService.LoaderLoad(false);
+      }
+    });
+  }
 
 }
