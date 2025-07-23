@@ -18,7 +18,7 @@ import { TtsVisaService } from '../../../services/tts-visa/tts-visa.service';
 export class UsersComponent implements OnInit {
 
   constructor(private _MemberService: MemberService, private _GlobalService: GlobalserviceService,
-    private fb: FormBuilder, private cdr: ChangeDetectorRef, private ttssta: TtsStaticsService, private sss: TtsVisaService) { }
+    private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
 
 
   UsersArr!: ApplicationUserDto[]
@@ -43,29 +43,5 @@ export class UsersComponent implements OnInit {
     this.UsersArr = data;
   }
 
-
-  async LoadDataTest() {
-    (await this.ttssta.GetTTSCountries()).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => { throw new Error(error); },
-      complete: () => {
-        this._GlobalService.LoaderLoad(false);
-      }
-    });
-  }
-
-  async LoadDataTest2() {
-    (await this.sss.GetVisaTypes(229, 229)).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => { throw new Error(error); },
-      complete: () => {
-        this._GlobalService.LoaderLoad(false);
-      }
-    });
-  }
 
 }

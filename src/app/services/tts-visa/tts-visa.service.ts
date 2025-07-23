@@ -13,9 +13,9 @@ export class TtsVisaService {
   constructor(private http: HttpClient, private _SettingService: LocalsettingService, private _TokenService: TokenService) {
   }
 
-  async GetVisaTypes(TravellingTo: number, NationalityId: number): Promise<Observable<TTSVisaTypeResponseDto>> {
+  async GetVisaTypes(TravellingToId: number, NationalityId: number): Promise<Observable<TTSVisaTypeResponseDto>> {
     const header = await this._TokenService.GetUserTokenHeader();
-    return this.http.get<TTSVisaTypeResponseDto>(`${this._SettingService.getData("APIUrl")}/TTSVisa/GetVisaTypes/${TravellingTo}/${NationalityId}`, { 'headers': header });
+    return this.http.get<TTSVisaTypeResponseDto>(`${this._SettingService.getData("APIUrl")}/TTSVisa/GetVisaTypes/${TravellingToId}/${NationalityId}`, { 'headers': header });
   }
 
 }

@@ -14,3 +14,633 @@
     </div>
 </div>
 <!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form class="form" [formGroup]="VisaRegForm">
+                    <div class="content-body visa-req">
+                        <section id="basic-input">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card">
+                                        <div class="card-header pb-0">
+                                            <h4 class="card-title mb-2">
+                                                <b>Visa Request Details</b>
+                                            </h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Nationality
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="Nationality"
+                                                                class="select2 form-select" id="Nationality">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Travelling To
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="TravellingTo"
+                                                                class="select2 form-select" id="TravellingTo">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-4">
+                                                    <div class="col-md-8">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Visa Type
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="VisaType" *ngIf="!VisaTypeDto"
+                                                                class="select2 form-control" id="VisaType">
+                                                                <option></option>
+                                                            </select>
+
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="VisaType" *ngIf="VisaTypeDto"
+                                                                class="select2 form-control" id="VisaType">
+                                                                <option></option>
+                                                                <option *ngFor="let data of VisaTypeDto.response.types"
+                                                                    [value]="data.visaTypeId">
+                                                                    {{data.visaTypeTitle}}
+                                                                    ({{data.forNationalityOf.countryName}} >>
+                                                                    {{data.forTravelTo.countryName}})
+                                                                    /
+                                                                    ({{data.rate.amount}} AED)</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">
+
+                                                            </label>
+                                                            <button class="btn btn-success btn-block"
+                                                                (click)="Click_LoadVisaType()">Load Visa
+                                                                Types</button>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Passport Issue Date
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="PassportIssueDate"
+                                                                class="form-control VisaDate" placeholder="YYYY-MM-DD">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Passport Expiry Date
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="PassportExpiryDate"
+                                                                class="form-control VisaDate" placeholder="YYYY-MM-DD">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Birth Date
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="BirthDate"
+                                                                class="form-control VisaDate" placeholder="YYYY-MM-DD">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Gender
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="Gender" class="select2 form-control"
+                                                                id="Gender">
+                                                                <option value=""></option>
+                                                                <option value="1">Male</option>
+                                                                <option value="2">Female</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Martial Status
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="Martial" class="select2 form-control"
+                                                                id="Martial">
+                                                                <option value=""></option>
+                                                                <option value="1">Single</option>
+                                                                <option value="2">Married</option>
+                                                                <option value="7">child</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Passport Number
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="PassportNumber" class="form-control"
+                                                                placeholder="">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <hr class="mt-2">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Birth Place
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnBirthPlace" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArBirthPlace" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">First Name
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnFirstName" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArFirstName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Middle Name
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnMiddleName" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArMiddleName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Last Name
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnLastName" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArLastName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Passport Issue Place
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnPassportIssuePlace" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArPassportIssuePlace" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Father Name
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnFatherName" type="text"
+                                                                    class="form-control" placeholder="MR">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArFatherName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Mother Name
+                                                                    
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnMotherName" type="text"
+                                                                    class="form-control" placeholder="MRS">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArMotherName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <fieldset class="form-group">
+                                                            <div class="input-group">
+                                                                <label for="basicInput">Spouse Name
+                                                                </label>
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="EnSpouseName" type="text"
+                                                                    class="form-control" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">EN</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group mt-1">
+                                                                <input [readOnly]="!IsShowStatusBox"
+                                                                    formControlName="ArSpouseName" type="text"
+                                                                    class="form-control text-right" placeholder="">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"
+                                                                        id="basic-addon2">AR</span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <hr class="mt-2">
+                                                <div class="row">
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Passport Country
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="PassportCountry"
+                                                                class="select2 form-control" id="PassportCountry">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Address City
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="AddressCity" class="form-control"
+                                                                placeholder="" id="AddressCity">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Address Street
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="AddressStreet" class="form-control"
+                                                                placeholder="">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Birth Country
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="BirthCountry"
+                                                                class="select2 form-control" id="BirthCountry">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Membership Group
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="MembershipGroup"
+                                                                class="select2 form-control" id="GroupMemebership">
+                                                                <option></option>
+                                                                <option value="1">Main person</option>
+                                                                <option value="2">Son of main person</option>
+                                                                <option value="3">Daughter of main person</option>
+                                                                <option value="4">Wife of main person</option>
+
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Language
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="Language" class="select2 form-control"
+                                                                id="Language">
+                                                                <option></option>
+                                                                <option value="1">Arabic</option>
+                                                                <option value="2">English</option>
+                                                                <option value="98">Other</option>
+
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Profession
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                class="select2 form-control" id="Profession">
+                                                                <option></option>
+                                                                <!-- <option *ngFor="let data of ProfessionsArr.data"
+                                                                    [value]="data.id">
+                                                                    {{data.text}}</option> -->
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Religion
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="Religion" class="select2 form-control"
+                                                                id="Religion">
+                                                                <option value="0">Unknown</option>
+                                                                <option value="1">Muslim</option>
+                                                                <option value="2">Christian</option>
+                                                                <option value="3">Hindu</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Phone Number
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="PhoneNumber" class="form-control"
+                                                                placeholder="+969.....">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="card-header pt-0 pl-1 mb-3">
+                                                        <h5 class="card-title pt-2 mb-0">
+                                                            <b> Additional Request Details</b>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Previous Nationality
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                class="select2 form-control" id="PreviousNationality">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Passport Type
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="PassportType"
+                                                                class="select2 form-control" id="PassportType">
+                                                                <option></option>
+                                                                <option value="1">Normal passport</option>
+                                                                <option value="2">Diplomatic passport</option>
+                                                                <option value="3">Travel Document</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Expected Entry Date
+                                                                
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox" type="text"
+                                                                formControlName="ExpectedEntryDate"
+                                                                class="form-control VisaDate" placeholder="YYYY-MM-DD">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Coming From Country
+                                                                
+                                                            </label>
+                                                            <select [disabled]="!IsShowStatusBox"
+                                                                formControlName="ComingCountry"
+                                                                class="select2 form-control" id="ComingCountry">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of CountryDto.response.countries"
+                                                                    [value]="data.id">
+                                                                    {{data.countryName}}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Parent Request Id
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox"
+                                                                formControlName="ParentRequest" type="text"
+                                                                class="form-control">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Request Notes
+                                                            </label>
+                                                            <input [readOnly]="!IsShowStatusBox"
+                                                                formControlName="Remarks" type="text"
+                                                                class="form-control"
+                                                                placeholder="Notes of request is any">
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-6" *ngIf="IsShowStatusBox">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">
+                                                            </label>
+                                                            <button type="button" class="btn btn-success mr-1"
+                                                                (click)="SaveToDraft()">Save Visa To Draft</button>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-6" style="text-align: right;">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">
+                                                            </label>
+                                                            <button [hidden]="!IsShowStatusBox" type="button"
+                                                                class="btn btn-warning mr-1"
+                                                                (click)="CallTranslate()">Translate
+                                                                Arabic</button>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
