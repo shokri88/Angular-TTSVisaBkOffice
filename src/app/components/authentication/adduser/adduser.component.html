@@ -26,13 +26,12 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <fieldset class="form-group">
-                                    <label >Company Name*
+                                    <label>Company Name*
                                     </label>
                                     <select class="select2 form-select" required formControlName="companyId">
                                         <option value="">Select Item</option>
-                                        <option *ngFor="let data of CompanyArr"
-                                                    [value]="data.id">
-                                                    {{data.companyName}}</option>
+                                        <option *ngFor="let data of CompanyArr" [value]="data.id">
+                                            {{data.companyName}}</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -88,8 +87,14 @@
 
                         <hr>
                         <div class="row ">
-                            <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success waves-effect waves-light" [disabled]='Isloading'>
+                            <div class="col-6 d-flex justify-content-first">
+                                <a class="btn btn-warning waves-effect waves-light" [routerLink]="'/users'">
+                                    <i class="bx bx-arrow-back font-size-16 align-middle me-2"></i>
+                                    Back</a>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success waves-effect waves-light"
+                                    [disabled]='Isloading'>
                                     <i class="bx bx-plus font-size-16 align-middle me-2"></i>
                                     Submit</button>
                             </div>

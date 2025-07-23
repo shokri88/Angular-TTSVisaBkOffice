@@ -24,10 +24,8 @@ export class UsersComponent implements OnInit {
   UsersArr!: ApplicationUserDto[]
 
   async ngOnInit() {
-     this._GlobalService.LoaderLoad(true);
+    this._GlobalService.LoaderLoad(true);
     this.LoadDataList();
-    this.LoadDataTest();
-    this.LoadDataTest2();
   }
 
   async LoadDataList() {
@@ -59,7 +57,7 @@ export class UsersComponent implements OnInit {
   }
 
   async LoadDataTest2() {
-    (await this.sss.GetVisaTypes(229,229)).subscribe({
+    (await this.sss.GetVisaTypes(229, 229)).subscribe({
       next: (data) => {
         console.log(data);
       },
