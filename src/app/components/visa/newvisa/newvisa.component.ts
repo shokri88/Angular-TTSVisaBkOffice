@@ -2,23 +2,23 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { MemberService } from '../../../services/authentication/member.service';
 import { GlobalserviceService } from '../../../services/public/globalservice.service';
 import { LocalsettingService } from '../../../services/public/localsetting.service';
 import { TtsStaticsService } from '../../../services/tts-statics/tts-statics.service';
 import { TtsVisaService } from '../../../services/tts-visa/tts-visa.service';
 import { TTSCountryResponseDto } from '../../../domains/dtos/TTSStatics/TTSCountryResponseDto';
 import { TTSVisaTypeResponseDto } from '../../../domains/dtos/TTSVisa/TTSVisaTypeResponseDto';
+import { NgxCroppedEvent, NgxPhotoEditorModule, NgxPhotoEditorService } from "ngx-photo-editor";
 
 @Component({
   selector: 'app-newvisa',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, NgxPhotoEditorModule],
   templateUrl: './newvisa.component.html',
   styleUrl: './newvisa.component.css'
 })
 export class NewvisaComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private service: NgxPhotoEditorService,
     private _GlobalService: GlobalserviceService, private _SettingService: LocalsettingService,
     private _StaticsService: TtsStaticsService, private _VisaService: TtsVisaService) { }
 
@@ -27,15 +27,16 @@ export class NewvisaComponent implements OnInit {
   IsShowStatusBox = true;
   IsLoadCountry = false;
 
-
   CountryDto!: TTSCountryResponseDto
   VisaTypeDto!: TTSVisaTypeResponseDto
+
+  FP_output?: NgxCroppedEvent;
 
 
   ngOnInit(): void {
 
-    // this._GlobalService.LoaderLoad(true);
-    // this.LoadCountries();
+    this._GlobalService.LoaderLoad(true);
+    this.LoadCountries();
 
 
     this.VisaRegForm = this.fb.group({
@@ -48,7 +49,7 @@ export class NewvisaComponent implements OnInit {
       ArPassportIssuePlace: [''], ArFatherName: [''], ArMotherName: [''], ArSpouseName: [''],
       PassportIssueDate: [''], PassportExpiryDate: [''], BirthDate: [''], PassportNumber: [''],
       AddressCity: [''], AddressStreet: [''], PhoneNumber: [''], ExpectedEntryDate: [''],
-      Remarks: [''],ParentRequest:['']
+      Remarks: [''], ParentRequest: ['']
     });
 
   }
@@ -106,6 +107,29 @@ export class NewvisaComponent implements OnInit {
         this._GlobalService.LoaderLoad(false);
       }
     });
+  }
+
+
+  //------------------------------------------------------- ATT-----------------------
+  FP_FileChangeHandler($event: any) {
+    this.service.open($event, {
+      imageQuality: 1,
+    }).subscribe(data => {
+      this.FP_output = data;
+    });
+  }
+  FP_Del() {
+    this.FP_output = {} as NgxCroppedEvent
+  }
+  FP_Edit($event: any) {
+    this.service.open($event, {
+    }).subscribe(data => {
+      this.FP_output = data;
+    });
+  }
+
+  async FP_ReadAI() {
+
   }
 
 }

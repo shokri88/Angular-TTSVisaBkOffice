@@ -28,7 +28,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-photo-editor/photo-editor.css",
+              "node_modules/cropperjs/dist/cropper.css"
             ],
             "scripts": [
               "./node_modules/@lottiefiles/lottie-player/dist/lottie-player.js"
@@ -89,7 +91,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-photo-editor/photo-editor.css",
+              "node_modules/cropperjs/dist/cropper.css"
             ],
             "scripts": [
               "./node_modules/@lottiefiles/lottie-player/dist/lottie-player.js"

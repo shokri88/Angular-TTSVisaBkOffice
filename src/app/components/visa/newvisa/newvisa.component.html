@@ -37,9 +37,9 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Nationality
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="Nationality"
                                                                 class="select2 form-select" id="Nationality">
                                                                 <option></option>
@@ -53,9 +53,9 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Travelling To
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="TravellingTo"
                                                                 class="select2 form-select" id="TravellingTo">
                                                                 <option></option>
@@ -72,17 +72,17 @@
                                                     <div class="col-md-8">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Visa Type
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="VisaType" *ngIf="!VisaTypeDto"
-                                                                class="select2 form-control" id="VisaType">
+                                                                class="select2 form-select" id="VisaType">
                                                                 <option></option>
                                                             </select>
 
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="VisaType" *ngIf="VisaTypeDto"
-                                                                class="select2 form-control" id="VisaType">
+                                                                class="select2 form-select" id="VisaType">
                                                                 <option></option>
                                                                 <option *ngFor="let data of VisaTypeDto.response.types"
                                                                     [value]="data.visaTypeId">
@@ -112,7 +112,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Passport Issue Date
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="PassportIssueDate"
@@ -122,7 +122,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Passport Expiry Date
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="PassportExpiryDate"
@@ -132,7 +132,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Birth Date
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="BirthDate"
@@ -145,10 +145,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Gender
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                formControlName="Gender" class="select2 form-control"
+                                                            <select 
+                                                                formControlName="Gender" class="select2 form-select"
                                                                 id="Gender">
                                                                 <option value=""></option>
                                                                 <option value="1">Male</option>
@@ -159,10 +159,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Martial Status
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                formControlName="Martial" class="select2 form-control"
+                                                            <select 
+                                                                formControlName="Martial" class="select2 form-select"
                                                                 id="Martial">
                                                                 <option value=""></option>
                                                                 <option value="1">Single</option>
@@ -174,7 +174,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Passport Number
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="PassportNumber" class="form-control"
@@ -188,7 +188,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">Birth Place
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnBirthPlace" type="text"
@@ -213,7 +213,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">First Name
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnFirstName" type="text"
@@ -262,7 +262,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">Last Name
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnLastName" type="text"
@@ -289,7 +289,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">Passport Issue Place
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnPassportIssuePlace" type="text"
@@ -314,7 +314,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">Father Name
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnFatherName" type="text"
@@ -339,7 +339,7 @@
                                                         <fieldset class="form-group">
                                                             <div class="input-group">
                                                                 <label for="basicInput">Mother Name
-                                                                    
+
                                                                 </label>
                                                                 <input [readOnly]="!IsShowStatusBox"
                                                                     formControlName="EnMotherName" type="text"
@@ -395,11 +395,11 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Passport Country
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="PassportCountry"
-                                                                class="select2 form-control" id="PassportCountry">
+                                                                class="select2 form-select" id="PassportCountry">
                                                                 <option></option>
                                                                 <option
                                                                     *ngFor="let data of CountryDto.response.countries"
@@ -411,7 +411,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Address City
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="AddressCity" class="form-control"
@@ -421,7 +421,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Address Street
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="AddressStreet" class="form-control"
@@ -433,11 +433,11 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Birth Country
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="BirthCountry"
-                                                                class="select2 form-control" id="BirthCountry">
+                                                                class="select2 form-select" id="BirthCountry">
                                                                 <option></option>
                                                                 <option
                                                                     *ngFor="let data of CountryDto.response.countries"
@@ -449,11 +449,11 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Membership Group
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="MembershipGroup"
-                                                                class="select2 form-control" id="GroupMemebership">
+                                                                class="select2 form-select" id="GroupMemebership">
                                                                 <option></option>
                                                                 <option value="1">Main person</option>
                                                                 <option value="2">Son of main person</option>
@@ -466,10 +466,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Language
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                formControlName="Language" class="select2 form-control"
+                                                            <select 
+                                                                formControlName="Language" class="select2 form-select"
                                                                 id="Language">
                                                                 <option></option>
                                                                 <option value="1">Arabic</option>
@@ -484,10 +484,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Profession
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                class="select2 form-control" id="Profession">
+                                                            <select 
+                                                                class="select2 form-select" id="Profession">
                                                                 <option></option>
                                                                 <!-- <option *ngFor="let data of ProfessionsArr.data"
                                                                     [value]="data.id">
@@ -498,10 +498,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Religion
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                formControlName="Religion" class="select2 form-control"
+                                                            <select 
+                                                                formControlName="Religion" class="select2 form-select"
                                                                 id="Religion">
                                                                 <option value="0">Unknown</option>
                                                                 <option value="1">Muslim</option>
@@ -513,7 +513,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Phone Number
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="PhoneNumber" class="form-control"
@@ -533,10 +533,10 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Previous Nationality
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
-                                                                class="select2 form-control" id="PreviousNationality">
+                                                            <select 
+                                                                class="select2 form-select" id="PreviousNationality">
                                                                 <option></option>
                                                                 <option
                                                                     *ngFor="let data of CountryDto.response.countries"
@@ -548,11 +548,11 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Passport Type
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="PassportType"
-                                                                class="select2 form-control" id="PassportType">
+                                                                class="select2 form-select" id="PassportType">
                                                                 <option></option>
                                                                 <option value="1">Normal passport</option>
                                                                 <option value="2">Diplomatic passport</option>
@@ -563,7 +563,7 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Expected Entry Date
-                                                                
+
                                                             </label>
                                                             <input [readOnly]="!IsShowStatusBox" type="text"
                                                                 formControlName="ExpectedEntryDate"
@@ -575,11 +575,11 @@
                                                     <div class="col-md-4">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">Coming From Country
-                                                                
+
                                                             </label>
-                                                            <select [disabled]="!IsShowStatusBox"
+                                                            <select 
                                                                 formControlName="ComingCountry"
-                                                                class="select2 form-control" id="ComingCountry">
+                                                                class="select2 form-select" id="ComingCountry">
                                                                 <option></option>
                                                                 <option
                                                                     *ngFor="let data of CountryDto.response.countries"
@@ -636,6 +636,54 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header pb-0">
+                                            <h4 class="card-title mb-2">
+                                                <b>Visa Request Attachments</b>
+                                            </h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message">
+                                                                <div class="img-box" *ngIf="FP_output?.base64">
+                                                                    <img [src]="FP_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="FP_Edit(FP_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="FP_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-success" type="button"
+                                                                        (click)="FP_ReadAI()"><i
+                                                                            class="bx bx-cloud-download"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Passport Page 1</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="FP_FileChangeHandler($event)" id="FP_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#FP_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </section>
                     </div>
