@@ -73,6 +73,24 @@ body[data-layout=detached] .vertical-menu .user-img img {
     padding-right: 5px;
 }
 
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: 3px;
+    height: 38px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 6px;
+    right: 5px;
+}
+
+.form-control
+{
+    height: 38px;
+}
+
 
 .dropzone {
     min-height: 300px;
@@ -107,6 +125,10 @@ body[data-layout=detached] .vertical-menu .user-img img {
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     text-align: center;
+}
+
+.dropzone .dz-message.half:before {
+    top: 60px;
 }
 
 .dropzone .dz-message {

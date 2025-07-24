@@ -23,7 +23,7 @@
                     <div class="content-body visa-req">
                         <section id="basic-input">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-8 pr-05">
                                     <div class="card">
                                         <div class="card-header pb-0">
                                             <h4 class="card-title mb-2">
@@ -64,33 +64,7 @@
                                                             </select>
                                                         </fieldset>
                                                     </div>
-                                                </div>
-
-                                                <div class="row mb-4">
-                                                    <div class="col-md-8">
-                                                        <fieldset class="form-group">
-                                                            <label for="basicInput">Visa Type
-
-                                                            </label>
-                                                            <select formControlName="VisaType" *ngIf="!VisaTypeDto"
-                                                                class="select2 form-select" id="VisaType">
-                                                                <option></option>
-                                                            </select>
-
-                                                            <select formControlName="VisaType" *ngIf="VisaTypeDto"
-                                                                class="select2 form-select" id="VisaType">
-                                                                <option></option>
-                                                                <option *ngFor="let data of VisaTypeDto.response.types"
-                                                                    [value]="data.visaTypeId">
-                                                                    {{data.visaTypeTitle}}
-                                                                    ({{data.forNationalityOf.countryName}} >>
-                                                                    {{data.forTravelTo.countryName}})
-                                                                    /
-                                                                    ({{data.rate.amount}} AED)</option>
-                                                            </select>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4 ">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">
 
@@ -98,6 +72,27 @@
                                                             <button class="btn btn-success btn-block"
                                                                 (click)="Click_LoadVisaType()">Load Visa
                                                                 Types</button>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-4" *ngIf="VisaTypeDto">
+                                                    <div class="col-md-12">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">Visa Type
+                                                            </label>
+                                                            <select formControlName="VisaType"
+                                                                class="select2 form-select" id="VisaType">
+                                                                <option></option>
+                                                                <option
+                                                                    *ngFor="let data of VisaTypeDto.response.types;let i = index; last as isLast; first as isFirst"
+                                                                    [value]="data.visaTypeId">
+                                                                    {{data.visaTypeTitle}}
+                                                                    ({{data.forNationalityOf.countryName}} >>
+                                                                    {{data.forTravelTo.countryName}})
+                                                                    /
+                                                                    ({{data.rate.amount}} AED)</option>
+                                                            </select>
                                                         </fieldset>
                                                     </div>
                                                 </div>
@@ -607,14 +602,6 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-6" style="text-align: right;">
-                                                        <fieldset class="form-group">
-                                                            <label for="basicInput">
-                                                            </label>
-                                                            <button [hidden]="!IsShowStatusBox" type="button"
-                                                                class="btn btn-warning mr-1"
-                                                                (click)="CallTranslate()">Translate
-                                                                Arabic</button>
-                                                        </fieldset>
                                                     </div>
                                                 </div>
 
@@ -624,7 +611,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-4 pl-05">
                                     <div class="card">
                                         <div class="card-header pb-0">
                                             <h4 class="card-title mb-2">

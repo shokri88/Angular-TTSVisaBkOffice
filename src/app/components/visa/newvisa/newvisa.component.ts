@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { GlobalserviceService } from '../../../services/public/globalservice.service';
@@ -10,6 +10,11 @@ import { TTSCountryResponseDto } from '../../../domains/dtos/TTSStatics/TTSCount
 import { TTSVisaTypeResponseDto } from '../../../domains/dtos/TTSVisa/TTSVisaTypeResponseDto';
 import { NgxCroppedEvent, NgxPhotoEditorModule, NgxPhotoEditorService } from "ngx-photo-editor";
 import { TTSProfessionDto } from '../../../domains/dtos/TTSVisa/TTSProfessionDto';
+import { NovaAIService } from '../../../services/nova/nova-ai.service';
+import { NovaPassportDataDto } from '../../../domains/dtos/NovaStatics/NovaPassportDataResponseDto';
+
+declare function LoadSelect2(): any;
+declare function SelectVisaReqSelectId(SelectId: any, Id: any): any;
 
 @Component({
   selector: 'app-newvisa',
@@ -17,11 +22,11 @@ import { TTSProfessionDto } from '../../../domains/dtos/TTSVisa/TTSProfessionDto
   templateUrl: './newvisa.component.html',
   styleUrl: './newvisa.component.css'
 })
-export class NewvisaComponent implements OnInit {
+export class NewvisaComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private service: NgxPhotoEditorService,
     private _GlobalService: GlobalserviceService, private _SettingService: LocalsettingService,
-    private _StaticsService: TtsStaticsService, private _VisaService: TtsVisaService) { }
+    private _StaticsService: TtsStaticsService, private _VisaService: TtsVisaService, private _NovaAIService: NovaAIService,) { }
 
 
   VisaRegForm!: FormGroup;
@@ -46,7 +51,7 @@ export class NewvisaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this._GlobalService.LoaderLoad(true);
+    this._GlobalService.LoaderLoad(true);
     this.LoadCountries();
     this.LoadProfession();
 
@@ -66,6 +71,11 @@ export class NewvisaComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(): void {
+    // $('.select2').on('select2:select', function (e: any) {
+    LoadSelect2();
+    // });
+  }
 
   DisableLoader() {
     if (this.IsLoadCountry && this.IsLoadProfessions) {
@@ -73,13 +83,13 @@ export class NewvisaComponent implements OnInit {
     }
   }
 
-
   Click_LoadVisaType() {
-    var NationalityId = this.VisaRegForm.controls['Nationality'].value;
-    var TravellingToId = this.VisaRegForm.controls['TravellingTo'].value;
-    if (NationalityId != '' && NationalityId != '') {
+    var NationalityId = (<HTMLInputElement>document.getElementById("Nationality")).value;
+    var TravellingToId = (<HTMLInputElement>document.getElementById("TravellingTo")).value;
+
+    if (NationalityId != '' && TravellingToId != '') {
       this._GlobalService.LoaderLoad(true);
-      this.LoadVisaType(TravellingToId, NationalityId);
+      this.LoadVisaType(Number(TravellingToId), Number(NationalityId));
     } else {
       this._SettingService.ToastMessage('Warning', 'Required Field', "Select Nationality & Travelling To");
     }
@@ -89,7 +99,7 @@ export class NewvisaComponent implements OnInit {
 
   }
 
-  CallTranslate() { }
+
 
 
   async LoadProfession() {
@@ -118,11 +128,11 @@ export class NewvisaComponent implements OnInit {
         if (this.VisaTypeDto.response.types.length == 0) {
           this._SettingService.ToastMessage('Warning', 'Warning', "No Any Items Found");
         }
-
       },
       error: (error) => { throw new Error(error); },
       complete: () => {
         this._GlobalService.LoaderLoad(false);
+        LoadSelect2();
       }
     });
   }
@@ -152,7 +162,73 @@ export class NewvisaComponent implements OnInit {
   }
 
   async FP_ReadAI() {
+    this._GlobalService.LoaderLoad(true);
+    (await this._NovaAIService.GetReadPassport(this.FP_output?.base64!)).subscribe({
+      next: (data) => {
+        this.LoadReadPassport(data.data!);
+        if (!data.success)
+          this._SettingService.ToastMessage("Error", "Server Error", data.errorCode);
+      },
+      error: (error) => { throw new Error(error); },
+      complete: () => {
+        this._GlobalService.LoaderLoad(false);
+      }
+    });
+  }
 
+  LoadReadPassport(data: NovaPassportDataDto) {
+
+    console.log(data);
+
+    this._SettingService.ToastMessage("Success", "Read Passport", "Passport Read Successfully");
+    this.FP_output = { base64: data!.passportPage0 } as NgxCroppedEvent
+    this.TR_output = { base64: data!.portrait } as NgxCroppedEvent
+
+    // SelectVisaReqSelectId("Nationality", data!.nationalityId);
+    // SelectVisaReqSelectId("BirthCountry", data!.birthCountryId);
+    SelectVisaReqSelectId("Martial", data!.maritalStatus);
+    SelectVisaReqSelectId("PassportType", data!.passportType);
+    // SelectVisaReqSelectId("PreviousNationality", data!.previousNationalityId);
+    // SelectVisaReqSelectId("GroupMemebership", data!.membershipGroupId);
+    // SelectVisaReqSelectId("Profession", data!.professionId);
+    // SelectVisaReqSelectId("Language", data!.languageId);
+    // SelectVisaReqSelectId("Religion", data!.religionId);
+    // SelectVisaReqSelectId("PassportCountry", data!.passportIssuingCountryId);
+    // SelectVisaReqSelectId("ComingCountry", data!.passportIssuingCountryId);
+
+    if (data!.gender == "M")
+      SelectVisaReqSelectId("Gender", "1");
+    else if (data!.gender == "F")
+      SelectVisaReqSelectId("Gender", "2");
+
+    var ctrl = this.VisaRegForm.controls;
+    ctrl['EnBirthPlace'].setValue(data!.birthPlace);
+    ctrl['EnFirstName'].setValue(data!.firstName);
+    ctrl['EnMiddleName'].setValue(data!.middleName);
+    ctrl['EnLastName'].setValue(data!.lastName);
+    ctrl['EnPassportIssuePlace'].setValue(data!.passportIssuePlace);
+    ctrl['EnFatherName'].setValue(data!.fatherName);
+    ctrl['EnMotherName'].setValue(data!.motherName);
+    ctrl['EnSpouseName'].setValue(data!.husbandName);
+
+    ctrl['ArBirthPlace'].setValue(data!.arabicBirthPlace);
+    ctrl['ArFirstName'].setValue(data!.arabicFirstName);
+    ctrl['ArMiddleName'].setValue(data!.arabicMiddleName);
+    ctrl['ArLastName'].setValue(data!.arabicLastName);
+    ctrl['ArPassportIssuePlace'].setValue(data!.arabicPassportIssuePlace);
+    ctrl['ArFatherName'].setValue(data!.arabicFatherName);
+    ctrl['ArMotherName'].setValue(data!.arabicMotherName);
+    ctrl['ArSpouseName'].setValue(data!.arabicHusbandName);
+
+    ctrl['BirthDate'].setValue(data!.birthDate);
+    ctrl['PassportIssueDate'].setValue(data!.passportIssueDate);
+    ctrl['PassportExpiryDate'].setValue(data!.passportExpiryDate);
+    ctrl['PassportNumber'].setValue(data!.passportNumber);
+    ctrl['ExpectedEntryDate'].setValue(data!.expectedEntry);
+    ctrl['AddressCity'].setValue(data!.addressCity);
+    ctrl['AddressStreet'].setValue(data!.addressStreet);
+
+    LoadSelect2();
   }
 
   SP_FileChangeHandler($event: any) {

@@ -215,6 +215,17 @@ function initApp() {
 
 // Call the initialization function
 
+function LoadSelect2() {
+  $(".select2").select2({
+    width: "100%",
+    placeholder: "Select the item",
+  });
+}
+
+function SelectVisaReqSelectId(SelectId, Id) {
+  $("#" + SelectId).val(Id);
+  LoadSelect2();
+}
 
 var intervalId = window.setInterval(function () {
     initApp();
