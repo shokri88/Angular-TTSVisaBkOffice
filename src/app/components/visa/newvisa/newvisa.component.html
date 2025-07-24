@@ -39,8 +39,7 @@
                                                             <label for="basicInput">Nationality
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="Nationality"
+                                                            <select formControlName="Nationality"
                                                                 class="select2 form-select" id="Nationality">
                                                                 <option></option>
                                                                 <option
@@ -55,8 +54,7 @@
                                                             <label for="basicInput">Travelling To
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="TravellingTo"
+                                                            <select formControlName="TravellingTo"
                                                                 class="select2 form-select" id="TravellingTo">
                                                                 <option></option>
                                                                 <option
@@ -74,14 +72,12 @@
                                                             <label for="basicInput">Visa Type
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="VisaType" *ngIf="!VisaTypeDto"
+                                                            <select formControlName="VisaType" *ngIf="!VisaTypeDto"
                                                                 class="select2 form-select" id="VisaType">
                                                                 <option></option>
                                                             </select>
 
-                                                            <select 
-                                                                formControlName="VisaType" *ngIf="VisaTypeDto"
+                                                            <select formControlName="VisaType" *ngIf="VisaTypeDto"
                                                                 class="select2 form-select" id="VisaType">
                                                                 <option></option>
                                                                 <option *ngFor="let data of VisaTypeDto.response.types"
@@ -147,8 +143,7 @@
                                                             <label for="basicInput">Gender
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="Gender" class="select2 form-select"
+                                                            <select formControlName="Gender" class="select2 form-select"
                                                                 id="Gender">
                                                                 <option value=""></option>
                                                                 <option value="1">Male</option>
@@ -161,9 +156,8 @@
                                                             <label for="basicInput">Martial Status
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="Martial" class="select2 form-select"
-                                                                id="Martial">
+                                                            <select formControlName="Martial"
+                                                                class="select2 form-select" id="Martial">
                                                                 <option value=""></option>
                                                                 <option value="1">Single</option>
                                                                 <option value="2">Married</option>
@@ -397,8 +391,7 @@
                                                             <label for="basicInput">Passport Country
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="PassportCountry"
+                                                            <select formControlName="PassportCountry"
                                                                 class="select2 form-select" id="PassportCountry">
                                                                 <option></option>
                                                                 <option
@@ -435,8 +428,7 @@
                                                             <label for="basicInput">Birth Country
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="BirthCountry"
+                                                            <select formControlName="BirthCountry"
                                                                 class="select2 form-select" id="BirthCountry">
                                                                 <option></option>
                                                                 <option
@@ -451,8 +443,7 @@
                                                             <label for="basicInput">Membership Group
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="MembershipGroup"
+                                                            <select formControlName="MembershipGroup"
                                                                 class="select2 form-select" id="GroupMemebership">
                                                                 <option></option>
                                                                 <option value="1">Main person</option>
@@ -468,9 +459,8 @@
                                                             <label for="basicInput">Language
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="Language" class="select2 form-select"
-                                                                id="Language">
+                                                            <select formControlName="Language"
+                                                                class="select2 form-select" id="Language">
                                                                 <option></option>
                                                                 <option value="1">Arabic</option>
                                                                 <option value="2">English</option>
@@ -486,12 +476,12 @@
                                                             <label for="basicInput">Profession
 
                                                             </label>
-                                                            <select 
-                                                                class="select2 form-select" id="Profession">
+                                                            <select class="select2 form-select" id="Profession"
+                                                                formControlName="Profession">
                                                                 <option></option>
-                                                                <!-- <option *ngFor="let data of ProfessionsArr.data"
+                                                                <option *ngFor="let data of Professions"
                                                                     [value]="data.id">
-                                                                    {{data.text}}</option> -->
+                                                                    {{data.name}}</option>
                                                             </select>
                                                         </fieldset>
                                                     </div>
@@ -500,9 +490,8 @@
                                                             <label for="basicInput">Religion
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="Religion" class="select2 form-select"
-                                                                id="Religion">
+                                                            <select formControlName="Religion"
+                                                                class="select2 form-select" id="Religion">
                                                                 <option value="0">Unknown</option>
                                                                 <option value="1">Muslim</option>
                                                                 <option value="2">Christian</option>
@@ -535,8 +524,8 @@
                                                             <label for="basicInput">Previous Nationality
 
                                                             </label>
-                                                            <select 
-                                                                class="select2 form-select" id="PreviousNationality">
+                                                            <select class="select2 form-select"
+                                                                id="PreviousNationality">
                                                                 <option></option>
                                                                 <option
                                                                     *ngFor="let data of CountryDto.response.countries"
@@ -550,8 +539,7 @@
                                                             <label for="basicInput">Passport Type
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="PassportType"
+                                                            <select formControlName="PassportType"
                                                                 class="select2 form-select" id="PassportType">
                                                                 <option></option>
                                                                 <option value="1">Normal passport</option>
@@ -577,8 +565,7 @@
                                                             <label for="basicInput">Coming From Country
 
                                                             </label>
-                                                            <select 
-                                                                formControlName="ComingCountry"
+                                                            <select formControlName="ComingCountry"
                                                                 class="select2 form-select" id="ComingCountry">
                                                                 <option></option>
                                                                 <option
@@ -645,7 +632,7 @@
                                             </h4>
                                         </div>
                                         <div class="card-content">
-                                            <div class="card-body">
+                                            <div class="card-body p-2">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="dropzone dropzone-area">
@@ -678,6 +665,208 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-12">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message">
+                                                                <div class="img-box" *ngIf="SP_output?.base64">
+                                                                    <img [src]="SP_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="SP_Edit(SP_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="SP_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Passport Page 2</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="SP_FileChangeHandler($event)" id="SP_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#SP_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-6 pr-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="TR_output?.base64">
+                                                                    <img [src]="TR_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="TR_Edit(TR_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="TR_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Traveller's Photo</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="TR_FileChangeHandler($event)" id="TR_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#TR_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pl-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="CF_output?.base64">
+                                                                    <img [src]="CF_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="CF_Edit(CF_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="CF_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>National ID Card</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="CF_FileChangeHandler($event)" id="CF_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#CF_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-6 pr-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="DF_output?.base64">
+                                                                    <img [src]="DF_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="DF_Edit(DF_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="DF_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Additional Document 1</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="DF_FileChangeHandler($event)" id="DF_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#DF_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pl-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="DB_output?.base64">
+                                                                    <img [src]="DB_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="DB_Edit(DB_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="DB_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Additional Document 2</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="DB_FileChangeHandler($event)" id="DB_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#DB_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-2">
+
+                                                    <div class="col-md-6 pr-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="RT_output?.base64">
+                                                                    <img [src]="RT_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="RT_Edit(RT_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="RT_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Return Ticket Document</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="RT_FileChangeHandler($event)" id="RT_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#RT_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pl-05">
+                                                        <div class="dropzone dropzone-area">
+                                                            <div class="dz-message half">
+                                                                <div class="img-box" *ngIf="SD_output?.base64">
+                                                                    <img [src]="SD_output?.base64">
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-primary" type="button"
+                                                                        (click)="SD_Edit(SD_output?.base64)"><i
+                                                                            class="bx bx-edit"></i></button>
+                                                                    <button [hidden]="!IsShowStatusBox"
+                                                                        class="btn btn-danger" type="button"
+                                                                        (click)="SD_Del()"><i
+                                                                            class="bx bx-x"></i></button>
+                                                                </div>
+                                                                Select File To Upload
+                                                                <br>
+                                                                <small>Stay Document</small>
+                                                                <input [readOnly]="!IsShowStatusBox" type="file"
+                                                                    (change)="SD_FileChangeHandler($event)" id="SD_File"
+                                                                    class="file-upload">
+                                                                <button [hidden]="!IsShowStatusBox"
+                                                                    class="btn btn-warning" type="button"
+                                                                    onclick="$('#SD_File').click()"><i
+                                                                        class="bx bx-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
