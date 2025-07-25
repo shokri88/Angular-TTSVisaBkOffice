@@ -54,7 +54,6 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-
     this._GlobalService.LoaderLoad(true);
     this.LoadCountries();
     this.LoadProfession();
@@ -101,8 +100,6 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
 
   async SaveToDraft() {
     if (this.ValidateForm()) {
-
-
 
       this._GlobalService.LoaderLoad(true);
       var VisaTypeId = (<HTMLInputElement>document.getElementById("VisaType")).value;
@@ -162,13 +159,10 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
 
       this.FP_output = this.FP_output?.base64 ? (await this._NovaAIService.compressImage(this.FP_output?.base64!)) : ({} as NgxCroppedEvent);
       this.SP_output = this.SP_output?.base64 ? (await this._NovaAIService.compressImage(this.SP_output?.base64!)) : ({} as NgxCroppedEvent);
-
       this.TR_output = this.TR_output?.base64 ? (await this._NovaAIService.compressImage(this.TR_output?.base64!)) : ({} as NgxCroppedEvent);
       this.CF_output = this.CF_output?.base64 ? (await this._NovaAIService.compressImage(this.CF_output?.base64!)) : ({} as NgxCroppedEvent);
-
       this.DF_output = this.DF_output?.base64 ? (await this._NovaAIService.compressImage(this.DF_output?.base64!)) : ({} as NgxCroppedEvent);
       this.DB_output = this.DB_output?.base64 ? (await this._NovaAIService.compressImage(this.DB_output?.base64!)) : ({} as NgxCroppedEvent);
-
       this.SD_output = this.SD_output?.base64 ? (await this._NovaAIService.compressImage(this.SD_output?.base64!)) : ({} as NgxCroppedEvent);
       this.RT_output = this.RT_output?.base64 ? (await this._NovaAIService.compressImage(this.RT_output?.base64!)) : ({} as NgxCroppedEvent);
 
@@ -182,7 +176,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       modal.returnTicketDocument = this.RT_output?.base64!;
 
       // if (this.UpdateReqId == 0) {
-      //   this.SendSaveRequestToServer(modal!);
+      this.SendSaveRequestToServer(modal!);
       // }
       // else {
       //   var UpdateModel = JSON.parse(JSON.stringify(modal)) as NovaUpdateVisaRequestDto;
@@ -191,10 +185,28 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       //   this.SendUpdateRequestToServer(UpdateModel);
       // }
 
-      console.log(modal);
-
 
     }
+  }
+
+  async SendSaveRequestToServer(Obj: TTSSaveVisaRequestDto) {
+    console.log(Obj);
+
+    (await this._VisaService.SaveVisaRequest(Obj)).subscribe({
+      next: (data) => {
+        if (data.success) {
+          this._SettingService.ToastMessage("Success", "Success", `Visa saved successfully. Request Id : ${data.response.requestId}`);
+          // window.location.href = `/visa/visarequest/visasubmit/search/${data.response.requestId}`
+        }
+        else {
+          this._SettingService.ToastMessage("Error", `Error : ${data.error.code}`, data.error.detail);
+        }
+      },
+      error: (error) => { this._GlobalService.LoaderLoad(false); throw new Error(error); },
+      complete: () => {
+        this._GlobalService.LoaderLoad(false);
+      }
+    });
   }
 
   ValidateForm(): boolean {
@@ -319,7 +331,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       next: (data) => {
         this.CountryDto = data;
       },
-      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false); throw new Error(error); },
       complete: () => {
         this.IsLoadCountry = true;
         this.DisableLoader();
@@ -335,7 +347,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
           this._SettingService.ToastMessage('Warning', 'Warning', "No Any Items Found");
         }
       },
-      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false); throw new Error(error); },
       complete: () => {
         this._GlobalService.LoaderLoad(false);
         LoadSelect2();
@@ -375,7 +387,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
         if (!data.success)
           this._SettingService.ToastMessage("Error", "Server Error", data.errorCode);
       },
-      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false); throw new Error(error); },
       complete: () => {
         this._GlobalService.LoaderLoad(false);
       }

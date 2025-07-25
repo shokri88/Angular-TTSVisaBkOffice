@@ -1,4 +1,9 @@
 export interface TTSBaseResponseDto {
     success: boolean;
-    error: string;
+    error: TTSBaseErrorResponseDto;
+}
+
+export interface TTSBaseErrorResponseDto {
+    code: string;
+    detail: string;
 }

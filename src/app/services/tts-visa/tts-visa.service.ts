@@ -4,6 +4,8 @@ import { LocalsettingService } from '../public/localsetting.service';
 import { TokenService } from '../public/token.service';
 import { TTSVisaTypeResponseDto } from '../../domains/dtos/TTSVisa/TTSVisaTypeResponseDto';
 import { Observable } from 'rxjs';
+import { TTSSaveVisaRequestDto } from '../../domains/dtos/TTSVisa/Request/TTSSaveVisaRequestDto';
+import { NovaSaveVisaResponseDto } from '../../domains/dtos/TTSVisa/NovaSaveVisaResponseDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +19,12 @@ export class TtsVisaService {
     const header = await this._TokenService.GetUserTokenHeader();
     return this.http.get<TTSVisaTypeResponseDto>(`${this._SettingService.getData("APIUrl")}/TTSVisa/GetVisaTypes/${TravellingToId}/${NationalityId}`, { 'headers': header });
   }
+
+  async SaveVisaRequest(obj: TTSSaveVisaRequestDto): Promise<Observable<NovaSaveVisaResponseDto>> {
+    const header = await this._TokenService.GetUserTokenHeader();
+    const body = JSON.stringify(obj);
+    return this.http.post<NovaSaveVisaResponseDto>(`${this._SettingService.getData("APIUrl")}/TTSVisa/SaveVisaRequest`, body, { 'headers': header });
+  }
+
 
 }
