@@ -73,6 +73,14 @@ body[data-layout=detached] .vertical-menu .user-img img {
     padding-right: 5px;
 }
 
+.toast-top-right.toast-container p {
+    margin-bottom: 0px;
+}
+
+.toast-container .ngx-toastr {
+    min-width: 350px;
+}
+
 .select2-container--default .select2-selection--single {
     background-color: #fff;
     border: 1px solid #ced4da;
@@ -86,8 +94,7 @@ body[data-layout=detached] .vertical-menu .user-img img {
     right: 5px;
 }
 
-.form-control
-{
+.form-control {
     height: 38px;
 }
 
@@ -101,6 +108,7 @@ body[data-layout=detached] .vertical-menu .user-img img {
 .dropzone .dz-message.half {
     font-size: 14px;
     padding-top: 55%;
+    line-height: 16px;
 }
 
 .dropzone .dz-message:before {

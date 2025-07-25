@@ -32,19 +32,34 @@ export class LocalsettingService {
 
   ToastMessage(type: string, title: string, message: string) {
     if (type === "Error") {
-      this.toastr.error(message, title);
+      this.toastr.error(message, title, {
+        enableHtml: true,
+        progressBar:true
+      });
     }
     else if (type === "Warning") {
-      this.toastr.warning(message, title);
+      this.toastr.warning(message, title, {
+        enableHtml: true,
+        progressBar:true
+      });
     }
     else if (type === "Success") {
-      this.toastr.success(message, title);
+      this.toastr.success(message, title, {
+        enableHtml: true,
+        progressBar:true
+      });
     }
     else if (type === "Information") {
-      this.toastr.info(message, title);
+      this.toastr.info(message, title, {
+        enableHtml: true,
+        progressBar:true
+      });
     }
     else {
-      this.toastr.show(message, title);
+      this.toastr.show(message, title, {
+        enableHtml: true,
+        progressBar:true
+      });
     }
   }
 

@@ -102,88 +102,97 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
   async SaveToDraft() {
     if (this.ValidateForm()) {
 
-      var obj = this.ReqData.find(x => x.Name === "VisaType");
-      if (obj?.Value.length! > 0) {
-
-        this._GlobalService.LoaderLoad(true);
-
-        var objVisaType = this.VisaTypeDto.response.types!.find(x => x.visaTypeId == Number(obj?.Value));
-
-        var modal = <TTSSaveVisaRequestDto>{};
-        modal.nationalityId = this.ReqData.find(x => x.Name === "Nationality")?.Value!;
-        modal.birthCountryId = this.ReqData.find(x => x.Name === "BirthCountry")?.Value!;
-        modal.birthDate = this.ReqData.find(x => x.Name === "BirthDate")?.Value!;
-        modal.gender = this.ReqData.find(x => x.Name === "Gender")?.Value!;
-        modal.maritalStatus = this.ReqData.find(x => x.Name === "Martial")?.Value!;
-        modal.passportIssuingCountryId = this.ReqData.find(x => x.Name === "PassportCountry")?.Value!;
-        modal.passportNumber = this.ReqData.find(x => x.Name === "PassportNumber")?.Value!;
-        modal.passportIssueDate = this.ReqData.find(x => x.Name === "PassportIssueDate")?.Value!;
-        modal.passportExpiryDate = this.ReqData.find(x => x.Name === "PassportExpiryDate")?.Value!;
-        modal.applicantAccountId = this.ReqData.find(x => x.Name === "Applicant")?.Value!;
-        modal.firstName = this.ReqData.find(x => x.Name === "EnFirstName")?.Value!;
-        modal.arabicFirstName = this.ReqData.find(x => x.Name === "ArFirstName")?.Value!;
-        modal.middleName = this.ReqData.find(x => x.Name === "EnMiddleName")?.Value!;
-        modal.arabicMiddleName = this.ReqData.find(x => x.Name === "ArMiddleName")?.Value!;
-        modal.lastName = this.ReqData.find(x => x.Name === "EnLastName")?.Value!;
-        modal.arabicLastName = this.ReqData.find(x => x.Name === "ArLastName")?.Value!;
-        modal.fatherName = this.ReqData.find(x => x.Name === "EnFatherName")?.Value!;
-        modal.arabicFatherName = this.ReqData.find(x => x.Name === "ArFatherName")?.Value!;
-        modal.motherName = this.ReqData.find(x => x.Name === "EnMotherName")?.Value!;
-        modal.arabicMotherName = this.ReqData.find(x => x.Name === "ArMotherName")?.Value!;
-        modal.husbandName = this.ReqData.find(x => x.Name === "EnSpouseName")?.Value!;
-        modal.arabicHusbandName = this.ReqData.find(x => x.Name === "ArSpouseName")?.Value!;
-        modal.passportIssuePlace = this.ReqData.find(x => x.Name === "EnPassportIssuePlace")?.Value!;
-        modal.arabicPassportIssuePlace = this.ReqData.find(x => x.Name === "ArPassportIssuePlace")?.Value!;
-        modal.birthPlace = this.ReqData.find(x => x.Name === "EnBirthPlace")?.Value!;
-        modal.arabicBirthPlace = this.ReqData.find(x => x.Name === "ArBirthPlace")?.Value!;
-        modal.passportType = this.ReqData.find(x => x.Name === "PassportType")?.Value!;
-        modal.previousNationalityId = this.ReqData.find(x => x.Name === "PreviousNationality")?.Value!;
-        modal.membershipGroupId = this.ReqData.find(x => x.Name === "GroupMemebership")?.Value!;
-        modal.professionId = this.ReqData.find(x => x.Name === "Profession")?.Value!;
-        modal.addressCountryId = this.ReqData.find(x => x.Name === "PassportCountry")?.Value!;
-        modal.addressCity = this.ReqData.find(x => x.Name === "AddressCity")?.Value!;
-        modal.addressStreet = this.ReqData.find(x => x.Name === "AddressStreet")?.Value!;
-        modal.phoneNumber = this.ReqData.find(x => x.Name === "PhoneNumber")?.Value!;
-        modal.uIDNumber = null;
-        modal.expectedTripDate = this.ReqData.find(x => x.Name === "ExpectedEntryDate")?.Value!;
-        modal.referenceNumber = null
-        modal.requestRemarks = this.ReqData.find(x => x.Name === "Remarks")?.Value!;
-        modal.comingFromCountryId = this.ReqData.find(x => x.Name === "ComingCountry")?.Value!;
-        modal.languageId = this.ReqData.find(x => x.Name === "Language")?.Value!;
-        modal.parentRequestId = "";//////////
-        modal.holdRequest = "1"
-        modal.religionId = this.ReqData.find(x => x.Name === "Religion")?.Value!;
-
-        this.FP_output = this.FP_output?.base64 ? (await this._NovaAIService.compressImage(this.FP_output?.base64!)) : ({} as NgxCroppedEvent);
-        this.SP_output = this.SP_output?.base64 ? (await this._NovaAIService.compressImage(this.SP_output?.base64!)) : ({} as NgxCroppedEvent);
-        this.TR_output = this.TR_output?.base64 ? (await this._NovaAIService.compressImage(this.TR_output?.base64!)) : ({} as NgxCroppedEvent);
-        this.CF_output = this.CF_output?.base64 ? (await this._NovaAIService.compressImage(this.CF_output?.base64!)) : ({} as NgxCroppedEvent);
-        // this.CB_output = this.CB_output?.base64 ? (await this._NovaAIService.compressImage(this.CB_output?.base64!)) : ({} as NgxCroppedEvent);
-        this.DF_output = this.DF_output?.base64 ? (await this._NovaAIService.compressImage(this.DF_output?.base64!)) : ({} as NgxCroppedEvent);
-        this.DB_output = this.DB_output?.base64 ? (await this._NovaAIService.compressImage(this.DB_output?.base64!)) : ({} as NgxCroppedEvent);
 
 
-        modal.portrait = this.TR_output?.base64!;
-        modal.passportPage1 = this.FP_output?.base64!;
-        modal.passportPage2 = this.SP_output?.base64!;
-        modal.nationalIDCardFront = this.CF_output?.base64!;
-        // modal.nationalIDCardBack = this.CB_output?.base64!;
-        modal.additionalDocument1 = this.DF_output?.base64!;
-        modal.additionalDocument2 = this.DB_output?.base64!;
+      this._GlobalService.LoaderLoad(true);
+      var VisaTypeId = (<HTMLInputElement>document.getElementById("VisaType")).value;
+      var objVisaType = this.VisaTypeDto.response.types!.find(x => x.visaTypeId == Number(VisaTypeId));
 
-        // if (this.UpdateReqId == 0) {
-        //   this.SendSaveRequestToServer(modal!);
-        // }
-        // else {
-        //   var UpdateModel = JSON.parse(JSON.stringify(modal)) as NovaUpdateVisaRequestDto;
+      var modal = <TTSSaveVisaRequestDto>{};
+      modal.language = "";
+      modal.currencyId = String(objVisaType?.rate.currencyId);
+      modal.visaTypeId = String(objVisaType?.visaTypeId);
+      modal.visaRate = String(objVisaType?.rate.amount);
 
-        //   UpdateModel.RequestId = String(this.UpdateReqId);
-        //   this.SendUpdateRequestToServer(UpdateModel);
-        // }
+      modal.firstName = this.ReqData.find(x => x.Name === "EnFirstName")?.Value!;
+      modal.arabicFirstName = this.ReqData.find(x => x.Name === "ArFirstName")?.Value!;
+      modal.middleName = this.ReqData.find(x => x.Name === "EnMiddleName")?.Value!;
+      modal.arabicMiddleName = this.ReqData.find(x => x.Name === "ArMiddleName")?.Value!;
+      modal.lastName = this.ReqData.find(x => x.Name === "EnLastName")?.Value!;
+      modal.arabicLastName = this.ReqData.find(x => x.Name === "ArLastName")?.Value!;
+      modal.fatherName = this.ReqData.find(x => x.Name === "EnFatherName")?.Value!;
+      modal.arabicFatherName = this.ReqData.find(x => x.Name === "ArFatherName")?.Value!;
+      modal.motherName = this.ReqData.find(x => x.Name === "EnMotherName")?.Value!;
+      modal.arabicMotherName = this.ReqData.find(x => x.Name === "ArMotherName")?.Value!;
+      modal.husbandName = this.ReqData.find(x => x.Name === "EnSpouseName")?.Value!;
+      modal.arabicHusbandName = this.ReqData.find(x => x.Name === "ArSpouseName")?.Value!;
+      modal.gender = this.ReqData.find(x => x.Name === "Gender")?.Value!;
+      modal.maritalStatus = this.ReqData.find(x => x.Name === "Martial")?.Value!;
+      modal.birthDate = this.ReqData.find(x => x.Name === "BirthDate")?.Value!;
+      modal.birthPlace = this.ReqData.find(x => x.Name === "EnBirthPlace")?.Value!;
+      modal.arabicBirthPlace = this.ReqData.find(x => x.Name === "ArBirthPlace")?.Value!;
+      modal.birthCountryId = this.ReqData.find(x => x.Name === "BirthCountry")?.Value!;
+      modal.nationalityId = this.ReqData.find(x => x.Name === "Nationality")?.Value!;
+      modal.previousNationalityId = this.ReqData.find(x => x.Name === "PreviousNationality")?.Value!;
+      modal.passportNumber = this.ReqData.find(x => x.Name === "PassportNumber")?.Value!;
+      modal.passportIssueDate = this.ReqData.find(x => x.Name === "PassportIssueDate")?.Value!;
+      modal.passportExpiryDate = this.ReqData.find(x => x.Name === "PassportExpiryDate")?.Value!;
+      modal.passportIssuingCountryId = this.ReqData.find(x => x.Name === "PassportCountry")?.Value!;
+      modal.addressCountryId = this.ReqData.find(x => x.Name === "ComingCountry")?.Value!;
+      modal.addressCity = this.ReqData.find(x => x.Name === "AddressCity")?.Value!;
+      modal.addressStreet = this.ReqData.find(x => x.Name === "AddressStreet")?.Value!;
+      modal.phoneNumber = this.ReqData.find(x => x.Name === "PhoneNumber")?.Value!;
+      modal.parentRequestId = this.ReqData.find(x => x.Name === "ParentRequest")?.Value!;
+      modal.quickEntry = "0";
+      modal.lockRequest = "1";
+      modal.membershipGroupId = this.ReqData.find(x => x.Name === "GroupMemebership")?.Value!;
+      modal.languageId = this.ReqData.find(x => x.Name === "Language")?.Value!;
+      modal.religionId = this.ReqData.find(x => x.Name === "Religion")?.Value!;
+      modal.professionId = this.ReqData.find(x => x.Name === "Profession")?.Value!;
+      modal.passportType = this.ReqData.find(x => x.Name === "PassportType")?.Value!;
+      modal.passportIssuePlace = this.ReqData.find(x => x.Name === "EnPassportIssuePlace")?.Value!;
+      modal.arabicPassportIssuePlace = this.ReqData.find(x => x.Name === "ArPassportIssuePlace")?.Value!;
+      modal.professionId = this.ReqData.find(x => x.Name === "Profession")?.Value!;
+      modal.addressCountryId = this.ReqData.find(x => x.Name === "PassportCountry")?.Value!;
+      modal.uIDNumber = null;
+      modal.expectedArrivalDate = this.ReqData.find(x => x.Name === "ExpectedEntryDate")?.Value!;
+      modal.referenceNumber = null;
+      modal.requestNotes = this.ReqData.find(x => x.Name === "Remarks")?.Value!;
 
-        console.log(modal);
 
-      }
+      this.FP_output = this.FP_output?.base64 ? (await this._NovaAIService.compressImage(this.FP_output?.base64!)) : ({} as NgxCroppedEvent);
+      this.SP_output = this.SP_output?.base64 ? (await this._NovaAIService.compressImage(this.SP_output?.base64!)) : ({} as NgxCroppedEvent);
+
+      this.TR_output = this.TR_output?.base64 ? (await this._NovaAIService.compressImage(this.TR_output?.base64!)) : ({} as NgxCroppedEvent);
+      this.CF_output = this.CF_output?.base64 ? (await this._NovaAIService.compressImage(this.CF_output?.base64!)) : ({} as NgxCroppedEvent);
+
+      this.DF_output = this.DF_output?.base64 ? (await this._NovaAIService.compressImage(this.DF_output?.base64!)) : ({} as NgxCroppedEvent);
+      this.DB_output = this.DB_output?.base64 ? (await this._NovaAIService.compressImage(this.DB_output?.base64!)) : ({} as NgxCroppedEvent);
+
+      this.SD_output = this.SD_output?.base64 ? (await this._NovaAIService.compressImage(this.SD_output?.base64!)) : ({} as NgxCroppedEvent);
+      this.RT_output = this.RT_output?.base64 ? (await this._NovaAIService.compressImage(this.RT_output?.base64!)) : ({} as NgxCroppedEvent);
+
+      modal.passengerPhoto = this.TR_output?.base64!;
+      modal.document1 = this.FP_output?.base64!;
+      modal.document2 = this.SP_output?.base64!;
+      modal.document3 = this.CF_output?.base64!;
+      modal.document4 = this.DF_output?.base64!;
+      modal.document5 = this.DB_output?.base64!;
+      modal.stayDocument = this.SD_output?.base64!;
+      modal.returnTicketDocument = this.RT_output?.base64!;
+
+      // if (this.UpdateReqId == 0) {
+      //   this.SendSaveRequestToServer(modal!);
+      // }
+      // else {
+      //   var UpdateModel = JSON.parse(JSON.stringify(modal)) as NovaUpdateVisaRequestDto;
+
+      //   UpdateModel.RequestId = String(this.UpdateReqId);
+      //   this.SendUpdateRequestToServer(UpdateModel);
+      // }
+
+      console.log(modal);
+
 
     }
   }
@@ -196,63 +205,97 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
     var AlertAttachments: string = "";
     var ctrl = this.VisaRegForm.controls;
 
+    if ((<HTMLInputElement>document.getElementById("VisaType")) == null) {
+      this._SettingService.ToastMessage("Warning", "Warning", "Please Load Visa Types First");
+      return false;
+    }
+
     this.ReqData = [
-      { Title: "Passport Issue Date", Name: "PassportIssueDate", Value: ctrl['PassportIssueDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 4, IsReq: true },
-      { Title: "Passport Expiry Date", Name: "PassportExpiryDate", Value: ctrl['PassportExpiryDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 5, IsReq: true },
-      { Title: "Birth Date", Name: "BirthDate", Value: ctrl['BirthDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 6, IsReq: true },
-      { Title: "Passport Number", Name: "PassportNumber", Value: ctrl['PassportNumber'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 9, IsReq: true },
-      { Title: "EN Birth Place", Name: "EnBirthPlace", Value: ctrl['EnBirthPlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 10, IsReq: true },
-      { Title: "AR Birth Place", Name: "ArBirthPlace", Value: ctrl['ArBirthPlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 11, IsReq: true },
-      { Title: "EN FirstName", Name: "EnFirstName", Value: ctrl['EnFirstName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 12, IsReq: true },
-      { Title: "ARFirstName", Name: "ArFirstName", Value: ctrl['ArFirstName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 13, IsReq: true },
-      { Title: "EN Middle Name", Name: "EnMiddleName", Value: ctrl['EnMiddleName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 14, IsReq: false },
-      { Title: "AR Middle Name", Name: "ArMiddleName", Value: ctrl['ArMiddleName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 15, IsReq: false },
-      { Title: "EN Last Name", Name: "EnLastName", Value: ctrl['EnLastName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 16, IsReq: true },
-      { Title: "AR Last Name", Name: "ArLastName", Value: ctrl['ArLastName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 17, IsReq: true },
-      { Title: "EN Passport Issue Place", Name: "EnPassportIssuePlace", Value: ctrl['EnPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 18, IsReq: true },
-      { Title: "AR Passport Issue Place", Name: "ArPassportIssuePlace", Value: ctrl['ArPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 19, IsReq: true },
-      { Title: "EN Father Name", Name: "EnFatherName", Value: ctrl['EnFatherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 20, IsReq: true },
-      { Title: "AR Father Name", Name: "ArFatherName", Value: ctrl['ArFatherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 21, IsReq: true },
-      { Title: "EN Mother Name", Name: "EnMotherName", Value: ctrl['EnMotherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 22, IsReq: true },
-      { Title: "AR Mother Name", Name: "ArMotherName", Value: ctrl['ArMotherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 23, IsReq: true },
-      { Title: "EN Spouse Name", Name: "EnSpouseName", Value: ctrl['EnSpouseName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 24, IsReq: false },
-      { Title: "AR Spouse Name", Name: "ArSpouseName", Value: ctrl['ArSpouseName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 25, IsReq: false },
-      { Title: "Address City", Name: "AddressCity", Value: ctrl['AddressCity'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 27, IsReq: true },
-      { Title: "Address Street", Name: "AddressStreet", Value: ctrl['AddressStreet'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 28, IsReq: true },
-      { Title: "Phone Number", Name: "PhoneNumber", Value: ctrl['PhoneNumber'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 34, IsReq: true },
-      { Title: "Expected Entry Date", Name: "ExpectedEntryDate", Value: ctrl['ExpectedEntryDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 37, IsReq: true },
-      { Title: "Remarks", Name: "Remarks", Value: ctrl['Remarks'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 40, IsReq: false },
-      { Title: "Visa Type", Name: "VisaType", Value: (<HTMLInputElement>document.getElementById("VisaType")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 1, IsReq: true },
-      { Title: "Applicant", Name: "Applicant", Value: (<HTMLInputElement>document.getElementById("Applicant")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 2, IsReq: true },
-      { Title: "Nationality", Name: "Nationality", Value: (<HTMLInputElement>document.getElementById("Nationality")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 3, IsReq: true },
+      { Title: "Visa Type", Name: "VisaType", Value: (<HTMLInputElement>document.getElementById("VisaType")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 0, IsReq: true },
+      { Title: "EN FirstName", Name: "EnFirstName", Value: ctrl['EnFirstName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 1, IsReq: true },
+      { Title: "AR FirstName", Name: "ArFirstName", Value: ctrl['ArFirstName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 2, IsReq: true },
+      { Title: "EN Middle Name", Name: "EnMiddleName", Value: ctrl['EnMiddleName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 3, IsReq: false },
+      { Title: "AR Middle Name", Name: "ArMiddleName", Value: ctrl['ArMiddleName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 4, IsReq: false },
+      { Title: "EN Last Name", Name: "EnLastName", Value: ctrl['EnLastName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 5, IsReq: true },
+      { Title: "AR Last Name", Name: "ArLastName", Value: ctrl['ArLastName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 6, IsReq: true },
       { Title: "Gender", Name: "Gender", Value: (<HTMLInputElement>document.getElementById("Gender")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 7, IsReq: true },
       { Title: "Martial", Name: "Martial", Value: (<HTMLInputElement>document.getElementById("Martial")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 8, IsReq: true },
-      { Title: "Passport Country", Name: "PassportCountry", Value: (<HTMLInputElement>document.getElementById("PassportCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 26, IsReq: true },
-      { Title: "Birth Country", Name: "BirthCountry", Value: (<HTMLInputElement>document.getElementById("BirthCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 29, IsReq: true },
-      { Title: "Group Memebership", Name: "GroupMemebership", Value: (<HTMLInputElement>document.getElementById("GroupMemebership")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 30, IsReq: true },
-      { Title: "Language", Name: "Language", Value: (<HTMLInputElement>document.getElementById("Language")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 31, IsReq: true },
-      { Title: "Profession", Name: "Profession", Value: (<HTMLInputElement>document.getElementById("Profession")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 32, IsReq: true },
-      { Title: "Religion", Name: "Religion", Value: (<HTMLInputElement>document.getElementById("Religion")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 33, IsReq: true },
+      { Title: "Birth Date", Name: "BirthDate", Value: ctrl['BirthDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 9, IsReq: true },
+      { Title: "EN Birth Place", Name: "EnBirthPlace", Value: ctrl['EnBirthPlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 10, IsReq: true },
+      { Title: "AR Birth Place", Name: "ArBirthPlace", Value: ctrl['ArBirthPlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 11, IsReq: true },
+      { Title: "Birth Country", Name: "BirthCountry", Value: (<HTMLInputElement>document.getElementById("BirthCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 12, IsReq: true },
+      { Title: "Nationality", Name: "Nationality", Value: (<HTMLInputElement>document.getElementById("Nationality")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 13, IsReq: true },
       { Title: "Previous Nationality", Name: "PreviousNationality", Value: (<HTMLInputElement>document.getElementById("PreviousNationality")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 35, IsReq: true },
-      { Title: "Passport Type", Name: "PassportType", Value: (<HTMLInputElement>document.getElementById("PassportType")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 36, IsReq: true },
-      { Title: "Coming From Country", Name: "ComingCountry", Value: (<HTMLInputElement>document.getElementById("ComingCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 38, IsReq: true },
-      // { Title: "Reason of Travel", Name: "ReasonTravel", Value: (<HTMLInputElement>document.getElementById("ReasonTravel")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 39, IsReq: true },
+      { Title: "Passport Number", Name: "PassportNumber", Value: ctrl['PassportNumber'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 14, IsReq: true },
+      { Title: "Passport Issue Date", Name: "PassportIssueDate", Value: ctrl['PassportIssueDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 15, IsReq: true },
+      { Title: "Passport Expiry Date", Name: "PassportExpiryDate", Value: ctrl['PassportExpiryDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 16, IsReq: true },
+      { Title: "Passport Country", Name: "PassportCountry", Value: (<HTMLInputElement>document.getElementById("PassportCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 17, IsReq: true },
+      { Title: "Coming Country", Name: "ComingCountry", Value: (<HTMLInputElement>document.getElementById("ComingCountry")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 38, IsReq: true },
+      { Title: "Address City", Name: "AddressCity", Value: ctrl['AddressCity'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 18, IsReq: true },
+      { Title: "Address Street", Name: "AddressStreet", Value: ctrl['AddressStreet'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 19, IsReq: true },
+      { Title: "Phone Number", Name: "PhoneNumber", Value: ctrl['PhoneNumber'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 20, IsReq: true },
+      { Title: "Expected Entry Date", Name: "ExpectedEntryDate", Value: ctrl['ExpectedEntryDate'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 21, IsReq: true },
+      { Title: "Request Notes", Name: "Remarks", Value: ctrl['Remarks'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 22, IsReq: false },
+      { Title: "Parent Request Id", Name: "ParentRequest", Value: ctrl['ParentRequest'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 23, IsReq: false },
+      { Title: "EN Father Name", Name: "EnFatherName", Value: ctrl['EnFatherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 24, IsReq: true },
+      { Title: "AR Father Name", Name: "ArFatherName", Value: ctrl['ArFatherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 25, IsReq: true },
+      { Title: "EN Mother Name", Name: "EnMotherName", Value: ctrl['EnMotherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 26, IsReq: true },
+      { Title: "AR Mother Name", Name: "ArMotherName", Value: ctrl['ArMotherName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 27, IsReq: true },
+      { Title: "EN Spouse Name", Name: "EnSpouseName", Value: ctrl['EnSpouseName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 28, IsReq: false },
+      { Title: "AR Spouse Name", Name: "ArSpouseName", Value: ctrl['ArSpouseName'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 29, IsReq: false },
+      { Title: "Memebership Group", Name: "GroupMemebership", Value: (<HTMLInputElement>document.getElementById("GroupMemebership")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 30, IsReq: true },
+      { Title: "Language", Name: "Language", Value: (<HTMLInputElement>document.getElementById("Language")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 31, IsReq: true },
+      { Title: "Religion", Name: "Religion", Value: (<HTMLInputElement>document.getElementById("Religion")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 32, IsReq: true },
+      { Title: "Profession", Name: "Profession", Value: (<HTMLInputElement>document.getElementById("Profession")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 33, IsReq: true },
+      { Title: "Passport Type", Name: "PassportType", Value: (<HTMLInputElement>document.getElementById("PassportType")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 34, IsReq: true },
+      { Title: "EN Passport Issue Place", Name: "EnPassportIssuePlace", Value: ctrl['EnPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 35, IsReq: true },
+      { Title: "AR Passport Issue Place", Name: "ArPassportIssuePlace", Value: ctrl['ArPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 36, IsReq: true },
     ];
 
 
     for (let item of this.ReqData.sort(x => x.Index)) {
       if (item.Value == "" && item.IsReq == true && item.IsInput) {
-        Alert += `${item.Title} is required <br/>`
+        Alert += `<p>${item.Title} is required</p>`
         IsValid = false;
       }
       if (item.Value == "" && item.IsReq == true && item.IsSelect) {
-        Alert += `${item.Title} is not selected <br/>`
+        Alert += `<p>${item.Title} is not selected</p>`
         IsValid = false;
       }
     }
 
     if (!IsValid) {
-      this._SettingService.ToastMessage("Warning", "Warning Details", Alert);
+      this._SettingService.ToastMessage("Warning", "Required Field", Alert);
+    }
+
+    if (this.FP_output == null) {
+      AlertAttachments += `<p>Passport first page is not selected</p>`
+      IsValidAttachments = false;
+    }
+
+    if (this.SP_output == null) {
+      AlertAttachments += `<p>Passport second page is not selected</p>`
+      IsValidAttachments = false;
+    }
+
+    if (this.TR_output == null) {
+      AlertAttachments += `<p>Passenger Photo is not selected</p>`
+      IsValidAttachments = false;
+    }
+
+
+    if (this.SD_output == null) {
+      AlertAttachments += `<p>Stay Document is not selected</p>`
+      IsValidAttachments = false;
+    }
+
+    if (this.RT_output == null) {
+      AlertAttachments += `<p>Return Ticket is not selected</p>`
+      IsValidAttachments = false;
+    }
+
+    if (!IsValidAttachments) {
+      this._SettingService.ToastMessage("Warning", "Required Field", AlertAttachments);
     }
 
     if (IsValid && IsValidAttachments) {
@@ -276,7 +319,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       next: (data) => {
         this.CountryDto = data;
       },
-      error: (error) => { throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
       complete: () => {
         this.IsLoadCountry = true;
         this.DisableLoader();
@@ -292,7 +335,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
           this._SettingService.ToastMessage('Warning', 'Warning', "No Any Items Found");
         }
       },
-      error: (error) => { throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
       complete: () => {
         this._GlobalService.LoaderLoad(false);
         LoadSelect2();
@@ -332,7 +375,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
         if (!data.success)
           this._SettingService.ToastMessage("Error", "Server Error", data.errorCode);
       },
-      error: (error) => { throw new Error(error); },
+      error: (error) => { this._GlobalService.LoaderLoad(false);throw new Error(error); },
       complete: () => {
         this._GlobalService.LoaderLoad(false);
       }
