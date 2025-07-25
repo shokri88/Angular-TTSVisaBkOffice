@@ -6,7 +6,7 @@ import { GlobalserviceService } from '../../../services/public/globalservice.ser
 import { LocalsettingService } from '../../../services/public/localsetting.service';
 import { TtsStaticsService } from '../../../services/tts-statics/tts-statics.service';
 import { TtsVisaService } from '../../../services/tts-visa/tts-visa.service';
-import { TTSCountryResponseDto } from '../../../domains/dtos/TTSStatics/TTSCountryResponseDto';
+import { TTSCountryResponseBodyDto, TTSCountryResponseDto } from '../../../domains/dtos/TTSStatics/TTSCountryResponseDto';
 import { TTSVisaTypeResponseDto } from '../../../domains/dtos/TTSVisa/TTSVisaTypeResponseDto';
 import { NgxCroppedEvent, NgxPhotoEditorModule, NgxPhotoEditorService } from "ngx-photo-editor";
 import { TTSProfessionDto } from '../../../domains/dtos/TTSVisa/TTSProfessionDto';
@@ -55,6 +55,11 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._GlobalService.LoaderLoad(true);
+
+    this.CountryDto = {} as TTSCountryResponseDto;
+    this.CountryDto.response = {} as TTSCountryResponseBodyDto;
+    this.CountryDto.response.countries = [];
+
     this.LoadCountries();
     this.LoadProfession();
 

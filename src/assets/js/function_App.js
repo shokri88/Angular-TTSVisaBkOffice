@@ -232,5 +232,3 @@ var intervalId = window.setInterval(function () {
     handleDatatable();
 }, 1000);
 
-
-
