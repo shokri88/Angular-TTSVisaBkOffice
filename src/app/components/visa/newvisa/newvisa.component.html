@@ -592,7 +592,19 @@
                                                 </div>
                                                 <hr>
                                                 <div class="row">
-                                                    <div class="col-md-6" *ngIf="IsShowStatusBox">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+                                                            <label for="basicInput">
+                                                                Lock Request
+                                                            </label>
+                                                            <select formControlName="LockRequest"
+                                                                class="select2 form-select" id="LockRequest">
+                                                                <option value="0" selected>Unlock Request</option>
+                                                                <option value="1">Lock Request</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="IsShowStatusBox">
                                                         <fieldset class="form-group">
                                                             <label for="basicInput">
                                                             </label>
@@ -600,7 +612,7 @@
                                                                 (click)="SaveToDraft()">Save New Visa</button>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-md-6" style="text-align: right;">
+                                                    <div class="col-md-4" style="text-align: right;">
                                                     </div>
                                                 </div>
 

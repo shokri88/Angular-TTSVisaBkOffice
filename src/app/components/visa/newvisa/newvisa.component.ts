@@ -74,7 +74,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       ArPassportIssuePlace: [''], ArFatherName: [''], ArMotherName: [''], ArSpouseName: [''],
       PassportIssueDate: [''], PassportExpiryDate: [''], BirthDate: [''], PassportNumber: [''],
       AddressCity: [''], AddressStreet: [''], PhoneNumber: [''], ExpectedEntryDate: [''],
-      Remarks: [''], ParentRequest: ['']
+      Remarks: [''], ParentRequest: [''], LockRequest: ['']
     });
 
   }
@@ -146,7 +146,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       modal.phoneNumber = this.ReqData.find(x => x.Name === "PhoneNumber")?.Value!;
       modal.parentRequestId = this.ReqData.find(x => x.Name === "ParentRequest")?.Value!;
       modal.quickEntry = "0";
-      modal.lockRequest = "1";
+      modal.lockRequest = this.ReqData.find(x => x.Name === "LockRequest")?.Value!;
       modal.membershipGroupId = this.ReqData.find(x => x.Name === "GroupMemebership")?.Value!;
       modal.languageId = this.ReqData.find(x => x.Name === "Language")?.Value!;
       modal.religionId = this.ReqData.find(x => x.Name === "Religion")?.Value!;
@@ -267,7 +267,10 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       { Title: "Passport Type", Name: "PassportType", Value: (<HTMLInputElement>document.getElementById("PassportType")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 34, IsReq: true },
       { Title: "EN Passport Issue Place", Name: "EnPassportIssuePlace", Value: ctrl['EnPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 35, IsReq: true },
       { Title: "AR Passport Issue Place", Name: "ArPassportIssuePlace", Value: ctrl['ArPassportIssuePlace'].value, IsInput: true, IsSelect: false, IsImage: false, Index: 36, IsReq: true },
+      { Title: "LockRequest", Name: "LockRequest", Value: (<HTMLInputElement>document.getElementById("LockRequest")).value, IsInput: false, IsSelect: true, IsImage: false, Index: 37, IsReq: true },
     ];
+
+    
 
 
     for (let item of this.ReqData.sort(x => x.Index)) {
