@@ -13,3 +13,223 @@
     </div>
 </div>
 <!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Serach Visa Request</h4>
+                <form class="form" [formGroup]="VisaSearchForm">
+                    <div class="form-body">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Nationality
+                                    </label>
+                                    <select formControlName="Nationality" class="select2 form-select" id="Nationality">
+                                        <option></option>
+                                        <option *ngFor="let data of CountryDto.response.countries" [value]="data.id">
+                                            {{data.countryName}}</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Travelling To
+
+                                    </label>
+                                    <select formControlName="TravellingTo" class="select2 form-select"
+                                        id="TravellingTo">
+                                        <option></option>
+                                        <option *ngFor="let data of CountryDto.response.countries" [value]="data.id">
+                                            {{data.countryName}}</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4 ">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">
+
+                                    </label>
+                                    <button class="btn btn-success btn-block" (click)="Click_LoadVisaType()">Load Visa
+                                        Types</button>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4" *ngIf="VisaTypeDto">
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Visa Type
+                                    </label>
+                                    <select formControlName="VisaType" class="select2 form-select" id="VisaType">
+                                        <option value="0">All Types</option>
+                                        <option
+                                            *ngFor="let data of VisaTypeDto.response.types;let i = index; last as isLast; first as isFirst"
+                                            [value]="data.visaTypeId">
+                                            {{data.visaTypeTitle}}
+                                            ({{data.forNationalityOf.countryName}} >>
+                                            {{data.forTravelTo.countryName}})
+                                            /
+                                            ({{data.rate.amount}} AED)</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Start date
+                                    </label>
+                                    <fieldset class="form-group position-relative has-icon-left">
+                                        <input type="date" class="form-control" id="StartDate" required
+                                            placeholder="Select Date">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>End date
+                                    </label>
+                                    <fieldset class="form-group position-relative has-icon-left">
+                                        <input type="date" class="form-control" id="EndDate" required
+                                            placeholder="Select Date">
+                                    </fieldset>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="basicInput">Request Status
+                                    </label>
+                                    <select class="select2 form-control" id="VisaStatus">
+                                        <option value="0">All Status</option>
+                                        <option value="Typing">Typing</option>
+                                        <option value="Typed">Typed</option>
+                                        <option value="Invalid Entries">Invalid Entries</option>
+                                        <option value="Revoked">Revoked</option>
+                                        <option value="Applied">Applied</option>
+                                        <option value="Processing">Processing</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                        <option value="Expired">Expired</option>
+                                        <option value="Modification Required">Modification Required</option>
+                                        <option value="Document Required">Document Required</option>
+                                        <option value="Entered, Left">Entered, Left</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Passenger Name
+                                    </label>
+                                    <input type="text" formControlName="PassengerName" class="form-control"
+                                        placeholder="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Request Number
+                                    </label>
+                                    <input type="text" formControlName="RequestNumber" class="form-control"
+                                        placeholder="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">Passport Number
+                                    </label>
+                                    <input type="text" formControlName="PassportNumber" class="form-control"
+                                        placeholder="">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mt-1">
+                            <div class="col-6 d-flex">
+                                <button class="btn btn-warning mr-1" type="button" (click)="ClearForm()">
+                                    Clear From
+                                </button>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+
+                                <button class="btn btn-success" type="button" (click)="SearchVisa('')">
+                                    Search Request
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" *ngIf="VisaReqList">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped  mb-0">
+                        <thead>
+                            <tr>
+                                <th>Request Id</th>
+                                <th>Passenger Name</th>
+                                <th>Passport Number</th>
+                                <th>Visa Number</th>
+                                <th>Request Date</th>
+                                <th>Visa Type</th>
+                                <th>Request Status</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr *ngFor="let item of visaDataArray">
+                                <th scope="row">{{item.requestId}}</th>
+                                <td>{{item.requestDetails.passengerFirstName}} {{item.requestDetails.passengerLastName}}
+                                </td>
+                                <td>{{item.requestDetails.passengerPassportNumber}}</td>
+                                <td>{{item.requestDetails.visaNumber}}</td>
+                                <td>{{item.dates.requestDate |HandleToDateComponent | HandleDateComponent| async}}
+                                </td>
+                                <td>{{item.requestDetails.visaType.title}}</td>
+                                <td>{{item.requestDetails.requestStatus}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 text-center">
+                    <ul hidden>
+                        <li
+                            *ngFor="let item of PageCountItems | paginate: { id: 'some_id', itemsPerPage: RecordsPerPage, currentPage: PageNumber, totalItems: totalItems }">
+                            {{ item.name }}
+                        </li>
+                    </ul>
+                    <!-- کنترل‌های صفحه‌بندی -->
+                    <pagination-controls id="some_id" (pageChange)="onChangePage($event)"
+                        (pageBoundsCorrection)="onChangePage($event)" [maxSize]="6" previousLabel="Next"
+                        nextLabel="Preview" screenReaderPaginationLabel="صفحه‌بندی" screenReaderPageLabel="صفحه"
+                        screenReaderCurrentLabel="شما در صفحه">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- end row -->

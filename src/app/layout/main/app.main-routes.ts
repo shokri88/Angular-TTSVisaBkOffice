@@ -20,7 +20,9 @@ export const mainroutes: Routes = [
             { path: 'users/updateuser/:id', component: UpdateuserComponent },
 
             { path: 'visa/newvisa', component: NewvisaComponent },
-            { path: 'visa/visarequests', component: VisarequestsComponent }
+            { path: 'visa/visarequests', component: VisarequestsComponent },
+            { path: 'visa/visarequests/:id', component: VisarequestsComponent },
+
         ]
     }
 ];

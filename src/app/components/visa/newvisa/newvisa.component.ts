@@ -201,7 +201,7 @@ export class NewvisaComponent implements OnInit, AfterViewInit {
       next: (data) => {
         if (data.success) {
           this._SettingService.ToastMessage("Success", "Success", `Visa saved successfully. Request Id : ${data.response.requestId}`);
-          // window.location.href = `/visa/visarequest/visasubmit/search/${data.response.requestId}`
+          window.location.href = `/visa/visarequests/${data.response.requestId}`
         }
         else {
           this._SettingService.ToastMessage("Error", `Error : ${data.error.code}`, data.error.detail);

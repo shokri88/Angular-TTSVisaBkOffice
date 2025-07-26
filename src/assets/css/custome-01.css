@@ -22,6 +22,20 @@
     top: 30%;
 }
 
+.ngx-pagination .current {
+    background: #eeb902 !important;
+    border-radius: 5px;
+}
+
+table {
+    font-size: 12px;
+}
+
+.table>:not(caption)>*>* {
+    padding: .4rem .4rem;
+    vertical-align: middle;
+}
+
 .loading.loader-hide {
     display: none;
 }
@@ -40,6 +54,10 @@
 
 form.ng-submitted.ng-invalid .ng-invalid {
     border-color: red !important;
+}
+
+.page-content {
+    padding: calc(70px + 12px) 0px 60px 24px;
 }
 
 fieldset.form-group {
@@ -251,9 +269,32 @@ body.sidebar-enable .vertical-menu {
     overflow: hidden;
 }
 
+.ngx-pagination .pagination-previous a:before,
+.ngx-pagination .pagination-previous.disabled:before {
+    margin-right: .1rem !important;
+}
+
+.ngx-pagination .pagination-next a:after,
+.ngx-pagination .pagination-next.disabled:after {
+    margin-left: .1rem !important;
+}
+
+.table thead tr {
+    color: #fff;
+    background-color: #283d92;
+}
+
+.ngx-pagination a:hover, .ngx-pagination button:hover {
+  border-radius: 5px;
+}
+
 @media (min-width: 992px) {
     body[data-layout=detached] .toggle-btn {
         display: none;
+    }
+
+    body[data-layout=detached] .container-fluid {
+        max-width: 98%;
     }
 }
 
@@ -284,5 +325,9 @@ body.sidebar-enable .vertical-menu {
 
     .logo span.logo-lg {
         display: none;
+    }
+
+    .ngx-pagination {
+        padding: 0;
     }
 }

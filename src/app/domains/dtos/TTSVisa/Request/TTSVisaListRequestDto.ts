@@ -1,6 +1,6 @@
 export interface TTSVisaListRequestDto {
-    recordPerPage: string;
-    pageNumber: string;
+    recordPerPage: number;
+    pageNumber: number;
     sortBy: string;
     startDate: string | null;
     endDate: string | null;
@@ -8,4 +8,5 @@ export interface TTSVisaListRequestDto {
     passportNumberLike: string | null;
     passengerNameLike: string | null;
     status: string[];
+    requestId: string | null;
 }
