@@ -193,9 +193,10 @@
                                 <th>Request Date</th>
                                 <th>Visa Type</th>
                                 <th>Request Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                             <tr *ngFor="let item of visaDataArray">
                                 <th scope="row">{{item.requestId}}</th>
                                 <td>{{item.requestDetails.passengerFirstName}} {{item.requestDetails.passengerLastName}}
@@ -206,12 +207,26 @@
                                 </td>
                                 <td>{{item.requestDetails.visaType.title}}</td>
                                 <td>{{item.requestDetails.requestStatus}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-info btn-sm w-100 dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Other Actions <i class="mdi mdi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item">View/Update Request</a>
+                                            <a class="dropdown-item">Revoke Request</a>
+                                            <a class="dropdown-item">Print Visa</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row">
+            <div class=" row">
                 <div class="col-xl-12 col-lg-12 text-center">
                     <ul hidden>
                         <li

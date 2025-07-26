@@ -230,5 +230,10 @@ function SelectVisaReqSelectId(SelectId, Id) {
 var intervalId = window.setInterval(function () {
     initApp();
     handleDatatable();
+    // renderCharts();
 }, 1000);
 
+
+//  setTimeout(function() {
+    
+//   }, 2000);

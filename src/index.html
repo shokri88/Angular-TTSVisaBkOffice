@@ -21,11 +21,14 @@
   <!-- Icons Css -->
   <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+  <!-- jquery.vectormap css -->
+  <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+    type="text/css" />
+
   <!-- App Css-->
   <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
   <link href="assets/css/toastr.css" id="app-style" rel="stylesheet" type="text/css" />
   <link href="assets/css/select2.min.css" id="app-style" rel="stylesheet" type="text/css" />
-  <!-- <link href="assets/css/photo-editor.css" rel="stylesheet" type="text/css" > -->
 
   <link href="assets/css/custome-01.css" id="app-style" rel="stylesheet" type="text/css" />
 </head>
@@ -33,9 +36,10 @@
 <body data-layout="detached" data-topbar="colored">
   <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
- <div class="loading loader-hide" id="full-loader">
+  <div class="loading loader-hide" id="full-loader">
     <div class="loader">
-       <lottie-player src="/assets/images/loader/wait-loader-2.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <lottie-player src="/assets/images/loader/wait-loader-2.json" background="transparent" speed="1" loop
+        autoplay></lottie-player>
     </div>
   </div>
 
@@ -69,9 +73,17 @@
   <!-- Datatable init js -->
   <script src="assets/js/pages/datatables.init.js"></script>
 
+  <!-- apexcharts -->
+  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+  <!-- jquery.vectormap map -->
+  <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
+
   <!-- App js -->
-  <!-- <script src="assets/js/app.js"></script> -->
-  <!-- <script src="assets/js/lottie-player.js"></script> -->
+  <script src="assets/js/pages/Function_dashboard.init.js"></script>
+
+
   <script src="assets/js/select2.min.js"></script>
   <script src="assets/js/function_App.js"></script>
 </body>
