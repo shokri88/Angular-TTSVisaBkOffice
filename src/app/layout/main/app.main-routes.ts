@@ -6,6 +6,7 @@ import { AdduserComponent } from '../../components/authentication/adduser/adduse
 import { ChangepasswordComponent } from '../../components/authentication/changepassword/changepassword.component';
 import { UpdateuserComponent } from '../../components/authentication/updateuser/updateuser.component';
 import { NewvisaComponent } from '../../components/visa/newvisa/newvisa.component';
+import { VisarequestsComponent } from '../../components/visa/visarequests/visarequests.component';
 
 export const mainroutes: Routes = [
     {
@@ -18,7 +19,8 @@ export const mainroutes: Routes = [
             { path: 'changepassword', component: ChangepasswordComponent },
             { path: 'users/updateuser/:id', component: UpdateuserComponent },
 
-            { path: 'visa/newvisa', component: NewvisaComponent }
+            { path: 'visa/newvisa', component: NewvisaComponent },
+            { path: 'visa/visarequests', component: VisarequestsComponent }
         ]
     }
 ];
